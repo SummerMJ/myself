@@ -687,7 +687,8 @@ export default StyleSheet.create({
     'display': 'block'
   },
   'body': {
-    'lineHeight': [{ 'unit': 'px', 'value': 1 }]
+    'lineHeight': [{ 'unit': 'px', 'value': 1 }],
+    'boxSizing': 'border-box'
   },
   'ol': {
     'listStyle': 'none'
