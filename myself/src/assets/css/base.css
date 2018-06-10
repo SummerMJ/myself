@@ -8,3 +8,10 @@
 .clearfix {
     zoom: 1;
 }
+.hr-20 {
+    margin: 20px auto;
+    width: 97%;
+    color: #ccc;
+    
+
+}

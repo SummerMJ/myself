@@ -7,6 +7,14 @@
                 Hello, My Name is LingChao Yang, you can call me Summer,
                 because I love Summer. I'm a font-end developer.
                 </p>
+                <hr class="hr-20">
+                <div class="blog-wrapper">
+                    <ul class="blog-list">
+                        <li class="blog-list-item">
+
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="right-part">123</div>
             
@@ -33,14 +41,26 @@
             }
             .left-part {
                 padding: 0 20px 10px 10px;
+                .about-myself {
+                    text-indent: 1.5em;
+                    font-size: 22px;
+                    line-height: 30px;
+                    font-weight: bold;
+                }
+                .blog-wrapper {
+                    margin-top: 30px;
+                    .blog-list {
+                        .blog-list-item {
+                            height: 200px;
+                            background-color: #ccc;
+                        }
+                    }
+
+                }
             }
             .right-part {
                 width: 300px;
                 background-color: #F2F2EB;
-            }
-            .about-myself {
-                font-size: 22px;
-                line-height: 26px;
             }
         }
         @media screen and (max-width: 1200px) {

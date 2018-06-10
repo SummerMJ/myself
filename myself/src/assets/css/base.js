@@ -10,5 +10,10 @@ export default StyleSheet.create({
   },
   'clearfix': {
     'zoom': '1'
+  },
+  'hr-20': {
+    'margin': [{ 'unit': 'px', 'value': 20 }, { 'unit': 'string', 'value': 'auto' }, { 'unit': 'px', 'value': 20 }, { 'unit': 'string', 'value': 'auto' }],
+    'width': [{ 'unit': '%H', 'value': 0.97 }],
+    'color': '#ccc'
   }
 });
