@@ -28,50 +28,26 @@
 </script>
 <style lang="scss" scoped>
     .home {
-        .ylc-content {
-            max-width: 1200px;
-            height: 400px;
-            margin: 100px auto;
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            display: table;
-            .left-part, .right-part {
-                display: table-cell;
-            }
+        .ylc-content {max-width: 1200px;height: 400px;margin: 100px auto;background: #fff;border-radius: 10px;padding: 20px;display: table;
+            .left-part, .right-part {display: table-cell;}
             .left-part {
                 padding: 0 20px 10px 10px;
-                .about-myself {
-                    text-indent: 1.5em;
-                    font-size: 22px;
-                    line-height: 30px;
-                    font-weight: bold;
-                }
-                .blog-wrapper {
-                    margin-top: 30px;
+                .about-myself {text-indent: 1.5em; font-size: 22px;line-height: 30px; font-weight: bold;}
+                .blog-wrapper {margin-top: 30px;
                     .blog-list {
-                        .blog-list-item {
-                            height: 200px;
-                            background-color: #ccc;
-                        }
+                        .blog-list-item {height: 200px;background-color: #ccc;}
                     }
-
                 }
             }
-            .right-part {
-                width: 300px;
-                background-color: #F2F2EB;
-            }
+            .right-part {width: 300px;background-color: #F2F2EB;}
+            @media screen and (max-width: 768px) {
+            .left-part, .right-part { display: block;}
+            .left-part { padding: 0; margin-bottom: 30px;}
+            .right-part { width: auto; }
+        }
         }
         @media screen and (max-width: 1200px) {
-            .ylc-content {
-                margin: 0 50px;
-            }
-        }
-        @media screen and (max-width: 768px) {
-            .left-part, .right-part {
-                display: block;
-            }
+            .ylc-content {margin: 0 50px;}
         }
     }
 </style>
