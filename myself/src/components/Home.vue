@@ -68,5 +68,10 @@
                 margin: 0 50px;
             }
         }
+        @media screen and (max-width: 768px) {
+            .left-part, .right-part {
+                display: block;
+            }
+        }
     }
 </style>
