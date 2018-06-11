@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Header/>
+        <Header></Header>
         <div class="ylc-content clearfix">
             <div class="left-part">
                 <p class="about-myself">
@@ -9,11 +9,7 @@
                 </p>
                 <hr class="hr-20">
                 <div class="blog-wrapper">
-                    <ul class="blog-list">
-                        <li class="blog-list-item">
-
-                        </li>
-                    </ul>
+                    <list-item />
                 </div>
             </div>
             <div class="right-part">123</div>
@@ -28,23 +24,19 @@
 </script>
 <style lang="scss" scoped>
     .home {
-        .ylc-content {max-width: 1200px;height: 400px;margin: 100px auto;background: #fff;border-radius: 10px;padding: 20px;display: table;
+        .ylc-content {max-width: 1200px;margin: 100px auto;background: #fff;border-radius: 10px;padding: 20px;display: table;
             .left-part, .right-part {display: table-cell;}
             .left-part {
                 padding: 0 20px 10px 10px;
                 .about-myself {text-indent: 1.5em; font-size: 22px;line-height: 30px; font-weight: bold;}
-                .blog-wrapper {margin-top: 30px;
-                    .blog-list {
-                        .blog-list-item {height: 200px;background-color: #ccc;}
-                    }
-                }
+                .blog-wrapper {margin-top: 30px;}
             }
             .right-part {width: 300px;background-color: #F2F2EB;}
             @media screen and (max-width: 768px) {
-            .left-part, .right-part { display: block;}
-            .left-part { padding: 0; margin-bottom: 30px;}
-            .right-part { width: auto; }
-        }
+                .left-part, .right-part { display: block;}
+                .left-part { padding: 0; margin-bottom: 30px;}
+                .right-part { width: auto; }
+            }
         }
         @media screen and (max-width: 1200px) {
             .ylc-content {margin: 0 50px;}

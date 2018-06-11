@@ -1,14 +1,14 @@
 <template>
     <div class="headers clearfix">
-        <div class="header-item">Home</div>
-        <div class="header-item">ABOUT</div>
+        <div class="header-item"><i class="iconfont icon-shouye"></i>Home</div>
+        <div class="header-item"><i class="iconfont icon-me"></i>ABOUT</div>
         <div class="header-item">
             <div class="img-wrapper">
                 <img src="../assets/images/me.jpeg" alt="me">
             </div>
         </div>
-        <div class="header-item">CONTACT</div>
-        <div class="header-item">COMMENT</div>
+        <div class="header-item"><i class="iconfont icon-emojifill"></i>NOTHING</div>
+        <div class="header-item"><i class="iconfont icon-yijianfankui"></i>COMMENT</div>
     </div>
 </template>
 <script>
@@ -34,6 +34,7 @@
             color: #fff;
             cursor: pointer;
             font-size: 22px;
+            i { font-size: 150%; margin-right: 10px; vertical-align: sub; }
             &:hover {
                 color: #ffd;
             }

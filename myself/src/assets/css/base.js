@@ -14,6 +14,7 @@ export default StyleSheet.create({
   'hr-20': {
     'margin': [{ 'unit': 'px', 'value': 20 }, { 'unit': 'string', 'value': 'auto' }, { 'unit': 'px', 'value': 20 }, { 'unit': 'string', 'value': 'auto' }],
     'width': [{ 'unit': '%H', 'value': 0.97 }],
-    'color': '#ccc'
+    'border': [{ 'unit': 'string', 'value': 'none' }],
+    'borderTop': [{ 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': '#ccc' }]
   }
 });
