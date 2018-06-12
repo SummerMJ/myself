@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Header></Header>
+        <ylc-header/>
         <div class="ylc-content clearfix">
             <div class="left-part">
                 <p class="about-myself">

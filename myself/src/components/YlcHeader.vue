@@ -1,5 +1,5 @@
 <template>
-    <div class="headers clearfix">
+    <div class="ylc-headers clearfix">
         <div class="header-item"><i class="iconfont icon-shouye"></i>Home</div>
         <div class="header-item"><i class="iconfont icon-me"></i>ABOUT</div>
         <div class="header-item">
@@ -13,11 +13,11 @@
 </template>
 <script>
     export default {
-        name: 'header'
+        name: 'ylc-headers'
     }
 </script>
 <style lang="scss" scoped>
-    .headers {
+    .ylc-headers {
         height: 100px;
         line-height: 100px;
         // width: 1200px;

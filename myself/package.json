@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "iview": "^2.14.2",
     "mongodb": "^3.0.10",
     "mongoose": "^5.1.4",
     "node-sass": "^4.9.0",
