@@ -8,11 +8,5 @@
 .clearfix {
     zoom: 1;
 }
-.hr-20 {
-    margin: 20px auto;
-    width: 97%;
-    border: none;
-    border-top: 1px solid #ccc;
-
-
-}
+.hr-20 {margin: 20px auto;width: 97%;border: none;border-top: 1px solid #ccc;}
+.hr-5 {margin: 5px auto;width: 97%;border: none;border-top: 1px solid #ccc;}

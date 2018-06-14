@@ -6,11 +6,15 @@ const db = mongoose.connection();
 db.once('error', () => console.log('Mongo connection error'));
 db.once('open', () => console.log('Mongo connection successful'));
 
-const loginSchema = mongoose.Schema({
-    account: String,
-    password: String
+const articalSchema = new mongoose.Schema({
+    startTime: String,
+    title: String,
+    content: String
 });
 
+const db = {
+    artical: mongoose.model("artical", articalSchema)
+}
 // const Models = {
 //     Login: mo
 // }

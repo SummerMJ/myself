@@ -16,5 +16,11 @@ export default StyleSheet.create({
     'width': [{ 'unit': '%H', 'value': 0.97 }],
     'border': [{ 'unit': 'string', 'value': 'none' }],
     'borderTop': [{ 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': '#ccc' }]
+  },
+  'hr-5': {
+    'margin': [{ 'unit': 'px', 'value': 5 }, { 'unit': 'string', 'value': 'auto' }, { 'unit': 'px', 'value': 5 }, { 'unit': 'string', 'value': 'auto' }],
+    'width': [{ 'unit': '%H', 'value': 0.97 }],
+    'border': [{ 'unit': 'string', 'value': 'none' }],
+    'borderTop': [{ 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': '#ccc' }]
   }
 });
