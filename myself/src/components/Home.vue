@@ -12,7 +12,16 @@
                     <list-item />
                 </div>
             </div>
-            <div class="right-part">123</div>
+            <div class="right-part">
+                <div class="fangwen clearfix">
+                    <div class="fangwen-item">
+                        <p>有<span>5</span>个人看过我</p>
+                    </div>
+                    <div class="fangwen-item">
+                        <p>收到<span>5</span>个赞</p>
+                    </div>
+                </div>
+            </div>
             
         </div>
     </div>
@@ -31,7 +40,19 @@
                 .about-myself {text-indent: 1.5em; font-size: 22px;line-height: 30px; font-weight: bold;}
                 .blog-wrapper {margin-top: 30px;}
             }
-            .right-part {width: 300px;background-color: #F2F2EB;}
+            .right-part {
+                width: 300px;
+                background-color: #F2F2EB;
+                    .fangwen {
+                        box-sizing: border-box;
+                        // height: 50px;
+                        // line-height: 50px;
+                        .fangwen-item {
+                            float: left;
+                            height: 50px;
+                        }
+                    }
+                }
             @media screen and (max-width: 768px) {
                 .left-part, .right-part { display: block;}
                 .left-part { padding: 0; margin-bottom: 30px;}
