@@ -1,32 +1,38 @@
 <template>
     <ul class="blog-list-item-wrapper clearfix">
-        <li class="blog-list-item">
-            <div class="left-date">2018-6-11</div>
-            <div class="right-content">
-                <h2>记录第一次写日志</h2>
-                <div class="blog-content">
-                    今天开始用Vue搭建项目开始写，主要为了以后自己的灵感不会丢失，记录自己每天遇到的问题和发现的新知识点。慢慢积累，提升自己。录自己每天遇到的问题和发现的新知识点。慢慢积累，提升自己。
+        <template v-for="item in list">
+            <li class="blog-list-item" :key=item.id>
+                <div class="left-date">{{ item.data.startTime }}</div>
+                <div class="right-content">
+                    <h2>{{ item.data.title }}</h2>
+                    <div class="blog-content">{{ item.data.content }}</div>
                 </div>
-            </div>
-            <a href="#" class="read-more">Read More+</a>
-        </li>
-        <hr class="hr-20">
-        <li class="blog-list-item">
-            <div class="left-date">2018-6-11</div>
-            <div class="right-content">
-                <h2>记录第一次写日志</h2>
-                <div class="blog-content">
-                    今天开始用Vue搭建项目开始写，主要为了以后自己的灵感不会丢失，记录自己每天遇到的问题和发现的新知识点。慢慢积累，提升自己。
-                </div>
-            </div>
-            <a href="#" class="read-more">Read More+</a>
-        </li>
-        
+                <a href="#" class="read-more">Read More+</a>
+            </li>
+            <hr class="hr-20" :key=item.id>
+        </template>    
     </ul>
 </template>
 <script>
+    import api from '../fetch/api'
     export default {
-        name:  "blog-list-item"
+        name:  "blog-list-item",
+        data () {
+            return {
+                list: []
+            }
+        },
+        methods: {
+            getArticalList () {
+                api.getArtical()
+                .then(res => {
+                    this.list = res;
+                });
+            }
+        },
+        mounted () {
+            this.getArticalList();
+        }
     }
 </script>
 <style lang="scss" scoped>
