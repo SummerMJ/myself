@@ -12,7 +12,15 @@ const articalSchema = new mongoose.Schema({
     content: String
 }, {collection: "artical"});
 
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    lastLogin: String,
+})
+
+
 const db = {
-    artical: mongoose.model("artical", articalSchema)
+    artical: mongoose.model("artical", articalSchema),
+    user: mongoose.model("user", userSchema)
 }
 module.exports = db;
