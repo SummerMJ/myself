@@ -16,9 +16,9 @@ router.get("/api/login", (req, res) => {
         if (err) {
             res.status(500).end()
         } else if (doc.length) {
-            if (doc[0].password === req.body.password) {
+            // if (doc[0].password === req.body.password) {
                 
-            }
+            // }
         }
     })
 })
