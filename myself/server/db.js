@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     lastLogin: String,
-})
+},{collection: "user"})
 
 
 const db = {

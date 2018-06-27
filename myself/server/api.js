@@ -11,14 +11,30 @@ router.get("/api/getArtical",(req, res) => {
 });
 
 //登录
-router.get("/api/login", (req, res) => {
+router.post("/api/login", (req, res) => {
+    var sess = req.session;
     db.user.find({user: req.body.user}, (err, doc) => {
         if (err) {
             res.status(500).end()
         } else if (doc.length) {
-            // if (doc[0].password === req.body.password) {
-                
-            // }
+            if (doc[0]._doc.password === req.body.password) {
+                req.session.regenerate(function (err) {
+                    if (err) {
+                        res.json({
+                            success: false,
+                            msg: "登陆失败"
+                        })
+                    } else {
+                        req.session.user = req.body.user;
+                        res.json({success: true, msg:"登陆成功", data: req.session.id})
+                    }
+                })
+            } else { 
+                res.json({
+                    success: false,
+                    msg: "账号或者密码错误"
+                })
+            }
         }
     })
 })
