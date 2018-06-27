@@ -20,7 +20,7 @@ app.use(session({
     }
 }))
 app.use(function (req, res, next) {
-    const url = req.originalUrl;
+    const url = req.path;
     if (url != "/api/login" && !req.session.user) {
         res.json({
             success: false,
