@@ -19,6 +19,7 @@ app.use(session({
         maxAge: 1000 * 60 * 6  // 有效期，单位是毫秒
     }
 }))
+//登陆拦截
 app.use(function (req, res, next) {
     const url = req.originalUrl;
     if (url != "/api/login" && !req.session.user) {
