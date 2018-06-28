@@ -35,6 +35,11 @@ router.post("/api/login", (req, res) => {
                     msg: "账号或者密码错误"
                 })
             }
+        } else {
+            res.json({
+                success: false,
+                msg: "账号或者密码错误"
+            })
         }
     })
 })

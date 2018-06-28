@@ -2,10 +2,10 @@
     <div class="login">
         <div class="login-wrapper">
             <el-form :model="loginForm" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="用户名" prop="pass">
+                <el-form-item label="用户名" prop="username">
                     <el-input type="text" v-model="loginForm.username" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="checkPass">
+                <el-form-item label="密码" prop="password">
                     <el-input type="password" v-model="loginForm.password" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -18,18 +18,15 @@
 </template>
   
 <script>
-    // import {  } 
+    import api from "../../../myself/src/fetch/api";
     export default {
         name: "login",
         data () {
-            var validatePass = (rule, value, callback) => {
+            var validatePassword = (rule, value, callback) => {
                 if (value === '') {
                 callback(new Error('请输入密码'));
                 } else {
-                if (this.ruleForm2.checkPass !== '') {
-                    this.$refs.ruleForm2.validateField('checkPass');
-                }
-                callback();
+                    callback();
                 }
             };
             return {
@@ -38,17 +35,34 @@
                     password: '', 
                     },
                     rules2: {
-                    checkPass: [
-                        { validator: validatePass, trigger: 'blur' }
-                    ],
+                        password: [
+                            { validator: validatePassword, trigger: 'blur' }
+                        ],
                     }    
             }
         },
         methods: {
+            login () {
+                api.login({
+                    user: this.loginForm.username,
+                    password: this.loginForm.password
+                })
+                .then(res => {
+                    if (res.success) {
+                        this.$message({
+                            message: '登录成功',
+                            type: 'success'
+                        })
+                        console.log(res)
+                    } else {
+                        this.$message.error(res.msg);
+                    }
+                })
+            },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    this.login();
                 } else {
                     console.log('error submit!!');
                     return false;

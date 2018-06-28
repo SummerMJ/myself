@@ -21,7 +21,7 @@ app.use(session({
 }))
 //登陆拦截
 app.use(function (req, res, next) {
-    const url = req.originalUrl;
+    const url = req.path;
     if (url != "/api/login" && !req.session.user) {
         res.json({
             success: false,
