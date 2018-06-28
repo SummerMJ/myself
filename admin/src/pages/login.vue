@@ -18,7 +18,8 @@
 </template>
   
 <script>
-    import api from "../../../myself/src/fetch/api";
+    import api from "../fetch/api";
+    import { mapActions } from 'vuex';
     export default {
         name: "login",
         data () {
@@ -42,6 +43,7 @@
             }
         },
         methods: {
+            ...mapActions({setUserInfo: 'setUserInfo'}),
             login () {
                 api.login({
                     user: this.loginForm.username,
@@ -53,7 +55,10 @@
                             message: '登录成功',
                             type: 'success'
                         })
+                        this.setUserInfo(res.data);
+                        this.$router.replace('/');                        
                         console.log(res)
+
                     } else {
                         this.$message.error(res.msg);
                     }

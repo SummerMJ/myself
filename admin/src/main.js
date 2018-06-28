@@ -11,6 +11,8 @@ import "./components/componentsRegister";
  
 Vue.use(ElementUI);
 
+console.log(store)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

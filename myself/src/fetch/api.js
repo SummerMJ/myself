@@ -53,12 +53,10 @@ const config = {
 }
 
 export default {
+    config: config,
     //获取文章列表
     getArtical (param) {
         return config.get('/api/getArtical', param);
     },
-    //登录
-    login (param) {
-        return config.post('/api/login', param);
-    }
+    
 }

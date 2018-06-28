@@ -43,4 +43,11 @@ router.post("/api/login", (req, res) => {
         }
     })
 })
+
+//登出
+router.get("/api/signOut", (req, res) => {
+    delete req.session.user;
+    res.json({success: true, data: null, msg: "登出成功"})
+
+})
 module.exports = router;
