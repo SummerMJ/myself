@@ -22,7 +22,7 @@ const router = new Router({
 // debugger
 router.beforeEach((to, from, next) => {  
     console.log(store.state.user)  
-    if (localStorage.getItem('loginStatus') || to.path == "/login") {
+    if (store.state.user.loginStatus || to.path == "/login") {
         next();
     } else {
         next({ path: '/login' });

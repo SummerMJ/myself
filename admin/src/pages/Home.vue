@@ -13,7 +13,11 @@ export default {
         ...mapActions({setSignOut: 'setSignOut'}),
         signOut () {
             api.signOut().then(res => {
-                this.setSignOut();
+                if (res.success) {
+                    this.setSignOut();
+                    // this.$router.replace('/login');  
+                }
+                
             })
         }
     }
