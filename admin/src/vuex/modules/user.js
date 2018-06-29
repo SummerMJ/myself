@@ -27,7 +27,7 @@ const actions = {
      * 退出登录
      */
     setSignOut({commit}, res) {
-        localStorage.setItem('userInfo', {});
+        localStorage.setItem('userInfo', null);
         localStorage.setItem('loginStatus', false);
         commit(types.SET_USER_INFO, {});
         commit(types.SET_LOGIN_STATUS, false);
