@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+var cookieParser = require("cookie-parser");
 var FileStore = require('session-file-store')(session);
 const app = express();
 const identityKey = "skey"; 
@@ -12,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: identityKey,
-    // store: new FileStore(),  // 本地存储session（文本文件，也可以选择其他store，比如redis的）
+    store: new FileStore(),  // 本地存储session（文本文件，也可以选择其他store，比如redis的）
     saveUninitialized: false,  // 是否自动保存未初始化的会话，建议false
     resave: false,  // 是否每次都重新保存会话，建议false
     cookie: {
@@ -24,6 +25,7 @@ app.use(function (req, res, next) {
     const url = req.path;
     if (url != "/api/login" && !req.session.user) {
         res.json({
+            code: 205,
             success: false,
             msg: "请重新登陆"
         });

@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 const db = require("./db");
 
@@ -26,6 +27,7 @@ router.post("/api/login", (req, res) => {
                         })
                     } else {
                         req.session.user = req.body.user;
+                        res.cookie('username',req.session.id,{expires: new Date(Date.now()+3600000),httpOnly:true, path:'/'});
                         res.json({success: true, msg:"登陆成功", data: req.session.id})
                     }
                 })
