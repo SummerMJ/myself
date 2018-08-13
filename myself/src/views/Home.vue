@@ -37,6 +37,7 @@
 </script>
 <style lang="scss" scoped>
 	.home {
+        background-color: #ABCAC9;
 		.ylc-content {max-width: 1200px;margin: 100px auto;background: #fff;border-radius: 10px;padding: 20px; box-shadow: 0 0 20px #fff;
 			.left-part, {float: left;}
 			.right-part {
