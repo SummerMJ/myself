@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import './assets/css/reset.css'
 import './assets/css/base.css'
+import store from './vuex/store'
 import './components/componentsRegister'
 import axios from 'axios'
 
@@ -17,6 +18,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

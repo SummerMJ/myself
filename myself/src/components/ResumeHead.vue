@@ -11,7 +11,6 @@
         	<div class="item">
         		<i class="iconfont icon-youxiang"></i><span>summeraric@163.com</span>	
         	</div>
-        	
         </div>
     </div>
 </template>
