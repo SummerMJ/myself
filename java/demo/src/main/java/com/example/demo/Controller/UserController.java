@@ -33,7 +33,7 @@ public class UserController {
             userService.add(user);
             map.put("code", 200);
             map.put("success", true);
-            map.put("msg", "添加成功");
+//            map.put("msg", "添加成功");
             map.put("data", user.getId());
         } catch (Exception e) {
             e.printStackTrace();
