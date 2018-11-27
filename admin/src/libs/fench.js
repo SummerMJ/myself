@@ -19,7 +19,7 @@ axios.interceptors.request.use(config => {
     promiseArr[config.url] = cancel;
 
     if (config.method == "post") config.data = qs.stringify(config.data);
-    store.commit("SHOWLOADING");
+    // store.commit("SHOWLOADING");
     return config;
 }, error => {
     return Promise.reject(error);
@@ -27,7 +27,7 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(response => {
     if (response && response.data.code == 200) {
-        store.commit("HIDELOADING");
+        // store.commit("HIDELOADING");
         return response;
     } else if (response) {
         console.log(response)
@@ -35,7 +35,7 @@ axios.interceptors.response.use(response => {
             message: response.msg,
             type: 'warning'
         });
-        store.commit("HIDELOADING");
+        // store.commit("HIDELOADING");
         return response;
     }
 

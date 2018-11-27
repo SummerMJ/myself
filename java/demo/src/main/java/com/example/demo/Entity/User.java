@@ -1,9 +1,10 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "user", catalog = "exercise")
@@ -18,85 +19,55 @@ public class User implements java.io.Serializable {
     private String userName;
     @Column(name = "password")
     private String password;
-    @Column(name = "height")
-    private double height;
+    @Column(name = "auth")
+    private Integer auth;
+    @Column(name = "home_desc")
+    private String homeDesc;
 
-    @DateTimeFormat(pattern = "YYYY-MM-dd")
-    @Column(name = "date")
-    private Date date;
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "last_date")
+    private Date lastDate;
 
     @Column(name = "age")
     private Integer age;
 
-    public User(Integer id, String userName, String password, double height, Date date, Integer age) {
-        this.id = id;
+    public User(String userName, String password, Integer auth, String homeDesc, Date lastDate, Integer age) {
         this.userName = userName;
         this.password = password;
-        this.height = height;
-        this.date = date;
+        this.auth = auth;
+        this.homeDesc = homeDesc;
+        this.lastDate = lastDate;
         this.age = age;
     }
 
     public User() {
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) { this.id = id; }
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getUserName() { return userName; }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    public void setUserName(String userName) { this.userName = userName; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) { this.password = password; }
 
-    public double getHeight() {
-        return height;
-    }
+    public Integer getAuth() { return auth; }
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
+    public void setAuth(Integer auth) { this.auth = auth; }
 
-    public Date getDate() {
-        return date;
-    }
+    public String getHomeDesc() { return homeDesc; }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    public void setHomeDesc(String homeDesc) { this.homeDesc = homeDesc; }
 
-    public Integer getAge() {
-        return age;
-    }
+    public Date getLastDate() { return lastDate; }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+    public void setLastDate(Date lastDate) { this.lastDate = lastDate; }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", height=" + height +
-                ", date=" + date +
-                ", age=" + age +
-                '}';
-    }
+    public Integer getAge() { return age; }
+
+    public void setAge(Integer age) { this.age = age; }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="a-edit-new-user">
-        <el-dialog :visible.sync="dialogVisible" width="30%" :before-close="handleClose" size="small">
+        <el-dialog :visible.sync="dialogVisible" width="400px" :before-close="handleClose" size="small">
             <span slot="title">{{ editOrNew + "用户" }}</span>
             <div class="operate-box">
                 <el-form ref="form" :model="form" :rules="rules" label-width="80px">
@@ -8,16 +8,13 @@
                         <el-input v-model="form.userName"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
-                        <el-input v-model="form.password"></el-input>
-                    </el-form-item>
-                    <el-form-item label="身高">
-                        <el-input v-model="form.height"></el-input>
-                    </el-form-item>
+                        <el-input v-model="form.password" type="password"></el-input>
+                    </el-form-item>                 
                     <el-form-item label="年龄">
                         <el-input v-model="form.age"></el-input>
                     </el-form-item>
-                    <el-form-item label="生日">
-                        <el-input v-model="form.date"></el-input>
+                    <el-form-item label="主页描述">
+                        <el-input type="textarea" v-model="form.homeDesc"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="confirm">确定</el-button>
@@ -32,6 +29,7 @@
 
 <script>
     import { Dialog, Form, FormItem, Input, Button, Message } from "element-ui";
+    import * as utils from "@/libs/utils"
     import ajax from "@/libs/fench"
     export default {
         name: "editNewUser",
@@ -44,7 +42,10 @@
                         { required: true, message: "姓名不能为空", trigger: "blur" },
                         { max: 10, message: "长度不能超过10个字符", trigger: "blur" }
                     ],
-                    password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
+                    password: [
+                        { required: true, message: "密码不能为空", trigger: "blur" },
+                        { min: 6, max: 16, message: "密码的长度在8到16个字符之间", trigger: "blur" },
+                    ]
                 }
             }
         },
@@ -61,29 +62,30 @@
                 this.$emit("close-dialog", false);
             },
             add() {
-                console.log(this.form);
-                ajax.post("user/add", this.form).then(res => {
-                    Message({
-                        message: this.editOrNew + "成功",
-                        type: 'success'
-                    });
-                    this.$emit("refresh");
+                let url = "";
+                if (this.rowDetail) {
+                    url = "upadte";
+                } else {
+                    url = "add";
+                }
+                ajax.post("user/" + url, this.form).then(res => {
+                    this.$emit("refresh-list", []);
+                    Message.success(this.editOrNew + "成功");
+                    this.handleClose();
                 })
             },
             confirm() {
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        this.add();
-                        this.handleClose();
+                        this.add();                    
                     } else {
                         return false;
                     }
                 });
-
             }
         },
         mounted() {
-            if (this.rowDetail) this.form = this.rowDetail;
+            if (this.rowDetail) this.form = utils.deepClone(this.rowDetail);
         },
         components: {
             "el-dialog": Dialog,

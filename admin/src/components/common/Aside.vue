@@ -29,7 +29,7 @@
         <el-menu-item index="user">
             <i class="el-icon-info"></i>
             <span slot="title">用户</span>
-        </el-menu-item>
+        </el-menu-item>        
     </el-menu>
 </template>
 

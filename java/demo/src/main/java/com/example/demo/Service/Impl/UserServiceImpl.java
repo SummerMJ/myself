@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         try {
             userRepository.save(user);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -42,12 +42,27 @@ public class UserServiceImpl implements UserService {
         try {
             userRepository.deleteById(id);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public User update(User user) {
+        try {
+            userRepository.saveAndFlush(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
+    }
+
+    @Override
+    public void login() {
+
+    }
+
+    @Override
+    public void register(User user) {
+
     }
 }

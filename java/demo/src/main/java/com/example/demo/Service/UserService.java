@@ -13,4 +13,8 @@ public interface UserService {
     void delete(Integer id);
 
     User update(User user);
+
+    void register(User user);
+
+    void login();
 }
