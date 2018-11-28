@@ -1,11 +1,58 @@
 <template>
-    <div class="home">欢迎回来,杨凌超</div>
+    <div class="home">
+        <el-container class="height-full">
+            <el-header>
+                <p class="title">一只胖子的家</p>
+                <router-link to="/login">
+                    <el-button size="small">退出</el-button>
+                </router-link>
+            </el-header>
+            <el-container class="height-full">
+                <el-aside width="200px">
+                    <CAside></CAside>
+                </el-aside>
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
+            </el-container>
+        </el-container>
+    </div>
 </template>
 
-<script>   
+<script>
+    import CAside from "@/components/common/Aside.vue"
+    import AHeader from "@/components/common/Aheader.vue"
+    import { Container, Header, Aside, Main, Button } from "element-ui"
     export default {
         name: 'home',
-        components: {           
+        components: {
+            "el-container": Container,
+            "el-header": Header,
+            "el-aside": Aside,
+            "el-main": Main,
+            "el-button": Button,
+            CAside,
+            AHeader
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .home {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .el-header {
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .title {
+            font-size: 20px;
+            color: #fff;
+        }
+    }
+</style>

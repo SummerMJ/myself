@@ -9,18 +9,28 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [{
             path: '/',
-            name: 'home',
-            component: Home
+            redirect: 'login'
         },
         {
-            path: '/about',
-            name: 'about',
-            component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+            path: '/login',
+            name: 'Login',
+            component: () => import('./views/Login.vue')
         },
         {
-            path: '/user',
-            name: 'user',
-            component: () => import( /* webpackChunkName: "about" */ './views/User.vue')
-        },
+            path: "/home",
+            name: "Home",
+            component: () => import("./views/Home.vue"),            
+            children: [{
+                    path: "dashboard",
+                    name: "Dashboard",
+                    component: () => import("./views/Dashboard.vue")
+                },
+                {
+                    path: "user",
+                    name: "User",
+                    component: () => import("./views/User.vue")
+                }
+            ]
+        }
     ]
 })
