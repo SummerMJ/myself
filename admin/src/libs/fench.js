@@ -8,8 +8,8 @@ import { Message } from "element-ui"
 let cancel, promiseArr = {};
 
 axios.defaults.timeout = 5000; //响应时间
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
-axios.defaults.baseURL = "http://192.168.100.142:8086/"; //配置接口地址
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; //配置请求头
+axios.defaults.baseURL = "http://192.168.0.101:8086/"; //配置接口地址
 // axios.defaults.baseURL = process.env.VUE_APP_API + "/api";   //配置接口地址
 
 //axios拦截
