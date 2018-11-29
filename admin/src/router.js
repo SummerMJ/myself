@@ -9,13 +9,18 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [{
             path: '/',
-            redirect: 'login'
+            redirect: 'cesium'
         },
         {
             path: '/login',
             name: 'Login',
             component: () => import('./views/Login.vue')
         },
+        {
+            path: "/cesium",
+            name: "Cesium",
+            component: () => import('./views/Cesium.vue')
+        },  
         {
             path: "/home",
             name: "Home",
