@@ -1,11 +1,19 @@
 <template>
-    <div class="home">欢迎回来,杨凌超</div>
+    <div class="home" id="cesiumContainer">
+        
+    </div>
 </template>
 
-<script>   
+<script>
+    import Cesium from "cesium/Cesium";
+    import 'cesium/Widgets/widgets.css'
+
     export default {
         name: 'home',
         components: {           
+        },
+        mounted () {            
+            let viewer = new Cesium.Viewer("cesiumContainer");
         }
     }
 </script>

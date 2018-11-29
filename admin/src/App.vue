@@ -31,6 +31,8 @@
             "el-button": Button,
             CAside,
             AHeader
+        },
+        mounted () {            
         }
     }
 </script>
