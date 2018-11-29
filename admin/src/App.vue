@@ -5,6 +5,17 @@
 <script>
     export default {
         name: 'home',
+        components: {
+            "el-container": Container,
+            "el-header": Header,
+            "el-aside": Aside,
+            "el-main": Main,
+            "el-button": Button,
+            CAside,
+            AHeader
+        },
+        mounted () {            
+        }
     }
 </script>
 
