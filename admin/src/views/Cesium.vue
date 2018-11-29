@@ -14,11 +14,11 @@ import city from "@/json/city.json";
 import { Button } from "element-ui";
 export default {
     name: "ceisum",
-    data () {
+    data() {
         return {
             viewer: {},
             height: 1
-        }
+        };
     },
     components: {
         "el-button": Button
@@ -38,15 +38,17 @@ export default {
                 }
             });
         },
-        add () {
+        add() {
             city.forEach(item => {
                 this.addNumber(item);
-            })
+            });
         },
-        addNumber (params) {
-            console.log(13213)
+        addNumber(params) {
             this.viewer.entities.add({
-                position: Cesium.Cartesian3.fromDegrees(params.lng , params.lat + 0.131),
+                position: Cesium.Cartesian3.fromDegrees(
+                    params.lng,
+                    params.lat + 0.131
+                ),
                 billboard: {
                     image: require("../assets/images/red.png"),
                     width: 104,
@@ -58,7 +60,7 @@ export default {
                     color: Cesium.Color.White,
                     eyeOffset: new Cesium.Cartesian3(0, 0, -20)
                 }
-            })
+            });
         },
         cameraFly() {
             let _this = this;
@@ -68,7 +70,7 @@ export default {
                     25.30652958,
                     1000000
                 ),
-                complete: function() {                   
+                complete: function() {
                     city.forEach(element => {
                         _this.addCity(element);
                     });
@@ -79,7 +81,7 @@ export default {
     mounted() {
         setInterval(() => {
             this.height = !this.height;
-        },500); 
+        }, 500);
         this.viewer = new Cesium.Viewer("CesiumContainer", {
             // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
             //     url:
