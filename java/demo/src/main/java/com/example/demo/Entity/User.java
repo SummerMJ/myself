@@ -17,6 +17,8 @@ public class User implements java.io.Serializable {
     private Integer id;
     @Column(name = "user_name")
     private String userName;
+    @Column(name = "real_name")
+    private String realName;
     @Column(name = "password")
     private String password;
     @Column(name = "auth")
@@ -42,6 +44,10 @@ public class User implements java.io.Serializable {
 
     public User() {
     }
+
+    public String getRealName() { return realName; }
+
+    public void setRealName(String realName) { this.realName = realName; }
 
     public Integer getId() { return id; }
 

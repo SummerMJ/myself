@@ -1,5 +1,5 @@
 <template>
-    <el-menu default-active="$route.path" class="height-full" :router="true" @open="handleOpen" @close="handleClose" @select="selectedMenu">       
+    <el-menu :default-active="activeItem" class="height-full" :router="true" @open="handleOpen" @close="handleClose" @select="selectedMenu">       
         <el-menu-item index="/home/dashboard">
             <i class="el-icon-menu"></i>
             <span slot="title">主页</span>
@@ -37,9 +37,11 @@
                 // this.$router.push(params);
             }
         },
-        created () {
-            // this.activeItem = this.$route.path;
-            console.log(this.$route.path);
+        mounted () {
+            this.$nextTick(() => {
+                this.activeItem = this.$route.path;
+                console.log(this.activeItem)
+            });
         }
 
     }

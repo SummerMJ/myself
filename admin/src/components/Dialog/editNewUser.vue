@@ -4,12 +4,15 @@
             <span slot="title">{{ editOrNew + "用户" }}</span>
             <div class="operate-box">
                 <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                    <el-form-item label="姓名" prop="userName">
+                    <el-form-item label="用户名" prop="userName">
                         <el-input v-model="form.userName"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
                         <el-input v-model="form.password" type="password"></el-input>
-                    </el-form-item>                 
+                    </el-form-item>
+                    <el-form-item label="姓名" prop="userName">
+                        <el-input v-model="form.realName"></el-input>
+                    </el-form-item>
                     <el-form-item label="年龄">
                         <el-input v-model="form.age"></el-input>
                     </el-form-item>
@@ -39,7 +42,7 @@
                 form: {},
                 rules: {
                     userName: [
-                        { required: true, message: "姓名不能为空", trigger: "blur" },
+                        { required: true, message: "用户名不能为空", trigger: "blur" },
                         { max: 10, message: "长度不能超过10个字符", trigger: "blur" }
                     ],
                     password: [
@@ -77,7 +80,7 @@
             confirm() {
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        this.add();                    
+                        this.add();
                     } else {
                         return false;
                     }

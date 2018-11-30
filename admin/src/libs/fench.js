@@ -9,7 +9,7 @@ let cancel, promiseArr = {};
 
 axios.defaults.timeout = 5000; //响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; //配置请求头
-axios.defaults.baseURL = "http://192.168.0.101:8086/"; //配置接口地址
+axios.defaults.baseURL = "http://192.168.100.142:8086/"; //配置接口地址
 // axios.defaults.baseURL = process.env.VUE_APP_API + "/api";   //配置接口地址
 
 //axios拦截
@@ -18,7 +18,7 @@ axios.interceptors.request.use(config => {
     if (promiseArr[config.url]) promiseArr[config.url]("取消请求");
     promiseArr[config.url] = cancel;
 
-    if (config.method == "post") config.data = qs.stringify(config.data);
+    // if (config.method == "post") config.data = qs.stringify(config.data);
     // store.commit("SHOWLOADING");
     return config;
 }, error => {

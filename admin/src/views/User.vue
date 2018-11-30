@@ -4,7 +4,9 @@
         <el-table :data="tableData" stripe style="width: 100%" border class="user-table" size="small">
             <el-table-column prop="id" label="编号" width="180">
             </el-table-column>
-            <el-table-column prop="userName" label="姓名" width="180">
+             <el-table-column prop="userName" label="用户名" width="180">
+            </el-table-column>
+            <el-table-column prop="realName" label="姓名" width="180">
             </el-table-column>
             <el-table-column prop="auth" label="权限">
                 <template slot-scope="scope">{{ scope.row.auth | role }}</template>
