@@ -79,9 +79,6 @@ export default {
         }
     },
     mounted() {
-        setInterval(() => {
-            this.height = !this.height;
-        }, 500);
         this.viewer = new Cesium.Viewer("CesiumContainer", {
             // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
             //     url:
@@ -90,7 +87,10 @@ export default {
             baseLayerPicker: false,
             infoBox: false
         });
-        this.cameraFly();
+        setTimeout(() => {
+            this.cameraFly();
+        }, 1000);
+        
     }
 };
 </script>

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
-   List<User> getUserList();
+    List<User> getUserList();
 
     void add(User user);
 
@@ -17,4 +17,5 @@ public interface UserService {
     void register(User user);
 
     void login();
+
 }

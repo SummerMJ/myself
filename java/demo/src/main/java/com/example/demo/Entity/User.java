@@ -33,8 +33,9 @@ public class User implements java.io.Serializable {
     @Column(name = "age")
     private Integer age;
 
-    public User(String userName, String password, Integer auth, String homeDesc, Date lastDate, Integer age) {
+    public User(String userName, String realName, String password, Integer auth, String homeDesc, Date lastDate, Integer age) {
         this.userName = userName;
+        this.realName = realName;
         this.password = password;
         this.auth = auth;
         this.homeDesc = homeDesc;
