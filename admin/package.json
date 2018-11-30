@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/cesium": "^1.47.3",
     "axios": "^0.18.0",
     "cesium": "^1.51.0",
     "element-ui": "^2.4.11",

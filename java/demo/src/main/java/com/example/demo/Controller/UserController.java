@@ -67,7 +67,7 @@ public class UserController {
             userService.delete(id);
             map.put("code", 200);
             map.put("success", true);
-            map.put("msg", "删除成功");
+            map.put("msg", "删除z`成功");
             map.put("data", "");
         } catch (Exception e) {
             e.printStackTrace();
