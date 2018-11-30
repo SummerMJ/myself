@@ -26,54 +26,29 @@ module.exports = {
             alias: {
                 '@': path.resolve(__dirname, './src'),
                 '@component': path.resolve(__dirname, './src/components'),
-                '@view': path.resolve(__dirname, './src/views'),
-                '@cesium': path.resolve(__dirname, cesiumSource)
+                'cesium': path.resolve(__dirname, cesiumSource),
             }
         },
         plugins: [
-            // 拷贝Cesium资源目录
-            new CopyWebpackPlugin([
-                { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
-                { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' },
-                { from: path.join(cesiumSource, 'ThirdParty'), to: 'ThirdParty' }
-            ]),
-            new CopyWebpackPlugin([
-                { from: path.join(cesiumSource, '../Build/Cesium/ThirdParty/Workers'), to: 'ThirdParty/Workers' },
-                { from: path.join(cesiumSource, '../Build/Cesium/Workers'), to: 'Workers' }
-            ]),
+            new CopyWebpackPlugin([{ from: path.join(cesiumSource, cesiumWorkers), to: 'static/Workers' }]),
+            new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Assets'), to: 'static/Assets' }]),
+            new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Widgets'), to: 'static/Widgets' }]),
+            new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'ThirdParty/Workers'), to: 'static/ThirdParty/Workers' }]),
             new webpack.DefinePlugin({
-                // Define relative base path in cesium for loading assets
-                CESIUM_BASE_URL: JSON.stringify('')
+                CESIUM_BASE_URL: JSON.stringify('./static')
             })
-        ]
-    },
-    chainWebpack: config => {
-        config           
-            .node.set('fs', 'empty').end()
-            .resolve.alias.set('cesium', path.resolve(__dirname, cesiumSource)).end().end()
-            .amd({
-                toUrlUndefined: true
-            })
-            .module
-            // 禁止Cesium警告: require function is used in a way in which dependencies cannot be statically extracted
-            // .set('unknownContextCritical', false).set('unknownContextRegExp', /^.\/.*$/)
-            // strip-pragma-loader 删除编译指示
-            .rule()
-            .include
-            .add(path.resolve(__dirname, cesiumSource))
-            .end()
-            .post()
-            .pre()
-            .test(/\.js$/)
-            .use('strip')
-            .loader('strip-pragma-loader')
-            .options({
-                pragmas: {
-                    debug: false
+        ],
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    commons: {
+                        name: 'Cesium',
+                        test: /[\\/]node_modules[\\/]cesium/,
+                        chunks: 'all'
+                    }
                 }
-            })
-            .end()
-            .end()
+            }
+        },
     },
     css: {
         extract: true,
@@ -98,5 +73,4 @@ module.exports = {
     //         }
     //     }
     // }
-
 }

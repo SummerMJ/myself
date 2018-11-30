@@ -4,9 +4,7 @@
 
 <script>
     export default {
-        name: 'home',        
-        mounted () {            
-        }
+        name: 'home'
     }
 </script>
 
