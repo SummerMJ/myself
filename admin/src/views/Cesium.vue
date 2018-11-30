@@ -39,6 +39,7 @@ export default {
             });
         },
         add() {
+            
             city.forEach(item => {
                 this.addNumber(item);
             });
@@ -83,10 +84,14 @@ export default {
             this.height = !this.height;
         }, 500);
         this.viewer = new Cesium.Viewer("CesiumContainer", {
-            // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-            //     url:
-            //         "https://services.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer"
-            // }),
+            animation: false,
+            geocoder: false,
+            navigationHelpButton: false,
+            timeLine: false,
+            imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+                url:
+                    "https://services.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer"
+            }),
             baseLayerPicker: false,
             infoBox: false
         });
@@ -95,7 +100,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.cesium-widget-credits {
+    display: none !important;
+}
 .cesium {
     position: absolute;
     height: 100%;
