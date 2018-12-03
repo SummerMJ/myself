@@ -85,16 +85,16 @@ export default {
             geocoder: false,
             navigationHelpButton: false,
             timeLine: false,
-            imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-                url:
-                    "https://services.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer"
-            }),
+            // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+            //     url:
+            //         "https://services.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer"
+            // }),
             baseLayerPicker: false,
             infoBox: false
         });
-        setTimeout(() => {
-            this.cameraFly();
-        }, 1000);
+        // setTimeout(() => {
+        //     this.cameraFly();
+        // }, 2000);
         
     }
 };
