@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import * as utils from "@/libs/utils"
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [{
@@ -41,3 +42,21 @@ export default new Router({
         }]
     }]
 })
+
+router.beforeEach((to, from, next) => {
+
+    const session = utils.getCookie("ticket");
+    console.log(session);
+    if (to.path == "/login") {
+        next();
+        return;
+    }
+    if (!session) {
+        next({path: "/login"});
+    } else {
+        next();
+    }
+    // next();
+})
+
+export default router;

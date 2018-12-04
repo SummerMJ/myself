@@ -61,16 +61,16 @@ module.exports = {
 
         }
     },
-    // devServer: {
-    //     proxy: {
-    //         "api/": {
-    //             target: " http://192.168.100.29:8080",
-    //             changeOrigin: true,
-    //             pathRewrite: {
-    //                 "^/api": ""
-    //             }
-    //
-    //         }
-    //     }
-    // }
+    devServer: {
+        proxy: {
+            "/api/": {
+                target: " http://192.168.100.142:8086/api/",
+                changeOrigin: true,
+                pathRewrite: {
+                    "^/api": ""
+                }
+    
+            }
+        }
+    }
 }

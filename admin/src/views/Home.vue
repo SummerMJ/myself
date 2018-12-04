@@ -4,7 +4,7 @@
             <el-header>
                 <p class="title">一只胖子的家</p>
                 <router-link to="/login">
-                    <el-button size="small">退出</el-button>
+                    <el-button size="small" @click="signOut">退出</el-button>
                 </router-link>
             </el-header>
             <el-container class="height-full">
@@ -20,11 +20,22 @@
 </template>
 
 <script>
+    import * as utils from "@/libs/utils";
     import CAside from "@/components/common/Aside.vue"
     import AHeader from "@/components/common/Aheader.vue"
-    import { Container, Header, Aside, Main, Button } from "element-ui"
+    import { Container, Header, Aside, Main, Button, Message } from "element-ui"
+    import { mapGetters } from "vuex"
     export default {
         name: 'home',
+        methods: {
+            signOut() {
+                utils.deleteCookie("ticket");
+                Message.success("登出成功");
+            }
+        },
+        computed:{
+            ...mapGetters(["userInfo"])
+        },
         components: {
             "el-container": Container,
             "el-header": Header,
@@ -33,6 +44,9 @@
             "el-button": Button,
             CAside,
             AHeader
+        },
+        mounted () {
+            console.log(this.userInfo);
         }
     }
 </script>

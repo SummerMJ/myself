@@ -57,8 +57,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login() {
-
+    public User login(String userName, String password) {
+        List<User> list = userRepository.findByUserNameAndPassword(userName, password);
+        if (list != null) {
+            return list.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override

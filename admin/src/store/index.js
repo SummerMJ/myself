@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as type from "@/store/types"
 
 Vue.use(Vuex)
 
@@ -12,10 +13,11 @@ export default new Vuex.Store({
         loading(state) {
             return state.loadingStatus;
         },
-        userInfo (state) {
+        userInfo(state) {
             return state.userInfo;
         }
     },
+    actions: {},
     mutations: {
         SHOWLOADING(state) {
             state.loadingStatus = true;
@@ -23,8 +25,8 @@ export default new Vuex.Store({
         HIDELOADING(state) {
             state.loadingStatus = false;
         },
-    },
-    actions: {
-
+        [type.SETUSERINFO](state, playload) {            
+            state.userInfo = playload;
+        }
     }
 })

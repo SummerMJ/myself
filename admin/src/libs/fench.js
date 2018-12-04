@@ -8,8 +8,9 @@ import { Message } from "element-ui"
 let cancel, promiseArr = {};
 
 axios.defaults.timeout = 5000; //响应时间
+axios.defaults.withCredentials = true; 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
-axios.defaults.baseURL = "http://192.168.100.142:8086/"; //配置接口地址
+axios.defaults.baseURL = "/api"; //配置接口地址
 // axios.defaults.baseURL = process.env.VUE_APP_API + "/api";   //配置接口地址
 
 //axios拦截
@@ -32,7 +33,7 @@ axios.interceptors.response.use(response => {
     } else if (response) {
         console.log(response)
         Message({
-            message: response.msg,
+            message: response.data.msg,
             type: 'warning'
         });
         // store.commit("HIDELOADING");

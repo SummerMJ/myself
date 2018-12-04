@@ -7,6 +7,9 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -17,7 +20,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -91,6 +94,37 @@ public class UserController {
         return map;
     }
 
+    @RequestMapping(value = "/login")
+    public Map<String, Object> login (String userName, String password, HttpServletResponse httpResponse) throws Exception {
+        User user = userService.login(userName, password);
 
+        Map<String, Object> map = new HashMap<>();
+        try {
+            if (user != null) {
+                Cookie cookie = new Cookie("ticket", user.getUserName());
+                cookie.setPath("/");
+                cookie.setMaxAge(60*60);
+                httpResponse.addCookie(cookie);
+                map.put("code", 200);
+                map.put("data", user);
+                map.put("msg", "登录成功");
+            } else {
+                map.put("code", 100);
+                map.put("msg", "登录失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
 
+    @RequestMapping("/getCookie")
+    public Map<String, Object> getCookie (HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        Map<String, Object> map = new HashMap<>();
+        for (Cookie cookie : cookies) {
+            map.put(cookie.getName(), cookie.getValue());
+        }
+        return map;
+    }
 }
