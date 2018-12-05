@@ -14,7 +14,7 @@ export default new Vuex.Store({
             return state.loadingStatus;
         },
         userInfo(state) {
-            return state.userInfo;
+            return JSON.parse(localStorage.getItem("userInfo"));
         }
     },
     actions: {},

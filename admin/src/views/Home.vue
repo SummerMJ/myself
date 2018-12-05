@@ -2,7 +2,7 @@
     <div class="home">
         <el-container class="height-full">
             <el-header>
-                <p class="title">一只胖子的家</p>
+                <p class="title">{{ userInfo.homeDesc }}</p>
                 <router-link to="/login">
                     <el-button size="small" @click="signOut">退出</el-button>
                 </router-link>
@@ -30,6 +30,7 @@
         methods: {
             signOut() {
                 utils.deleteCookie("ticket");
+                localStorage.removeItem("userInfo");
                 Message.success("登出成功");
             }
         },
