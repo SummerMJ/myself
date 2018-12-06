@@ -4,7 +4,7 @@ import store from "../store"
 import { Message } from "element-ui"
 // import { resolve } from "dns";
 
-
+console.log(process.env.VUE_APP_API);
 let cancel, promiseArr = {};
 
 axios.defaults.timeout = 5000; //响应时间

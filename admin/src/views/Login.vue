@@ -36,9 +36,8 @@ export default {
 		signIn() {
             let data = { userName: this.userName, password: this.password };
             ajax.post("/user/login", data).then(res =>{
-				Message.success(res.msg);
-				localStorage.setItem("userInfo", JSON.stringify(res.data));
-                // this.setUserInfo(res.data);
+				Message.success(res.msg);			
+                this.setUserInfo(res.data);
                 this.$router.push("/home/dashboard");
             })
 		

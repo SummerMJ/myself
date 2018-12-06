@@ -94,7 +94,7 @@ public class UserController {
         return map;
     }
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login" ,method = { RequestMethod.POST, RequestMethod.GET })
     public Map<String, Object> login (String userName, String password, HttpServletResponse httpResponse) throws Exception {
         User user = userService.login(userName, password);
 

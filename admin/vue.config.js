@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const fs = require("fs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-
+console.log(process.env.VUE_APP_API)
 let cesiumSource = "./node_modules/cesium/Source";
 let cesiumWorkers = "../Build/Cesium/Workers";
 
@@ -15,7 +15,7 @@ function loadGlobalStyles() {
 
 
 module.exports = {
-    baseUrl: "/",
+    baseUrl: process.env.NODE_ENV == "production" ? "/" : "/",
     outputDir: "dist",
     assetsDir: "./",
     filenameHashing: false,
@@ -64,7 +64,7 @@ module.exports = {
     devServer: {
         proxy: {
             "/api/": {
-                target: " http://192.168.0.101:8086/api/",
+                target: "http://193.112.89.63:8086/api/",
                 changeOrigin: true,
                 pathRewrite: {
                     "^/api": ""

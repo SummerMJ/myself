@@ -14,7 +14,10 @@ export default new Vuex.Store({
             return state.loadingStatus;
         },
         userInfo(state) {
-            return JSON.parse(localStorage.getItem("userInfo"));
+            if (!state.userInfo) {
+                return JSON.parse(localStorage.getItem("userInfo"));
+            }
+            return state.userInfo;
         }
     },
     actions: {},
@@ -27,6 +30,7 @@ export default new Vuex.Store({
         },
         [type.SETUSERINFO](state, playload) {            
             state.userInfo = playload;
+            localStorage.setItem("userInfo", JSON.stringify(playload));
         }
     }
 })
