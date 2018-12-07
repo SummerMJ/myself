@@ -1,26 +1,26 @@
 <template>
     <div class="a-user">
-        <el-button type="primary" size="small" @click="operateUser('add')">新增用户</el-button>
+        <el-button type="primary" size="small" v-if="auth" @click="operateUser('add')">新增用户</el-button>
         <el-table :data="tableData" stripe style="width: 100%" border class="user-table" size="small">
-            <el-table-column prop="id" label="编号" width="180">
+            <el-table-column prop="id" label="编号" width="80">
             </el-table-column>
              <el-table-column prop="userName" label="用户名" width="180">
             </el-table-column>
-            <el-table-column prop="realName" label="姓名" width="180">
+            <el-table-column prop="realName" label="姓名" width="120">
             </el-table-column>
-            <el-table-column prop="auth" label="权限">
+            <el-table-column prop="auth" label="权限" width="80">
                 <template slot-scope="scope">{{ scope.row.auth | role }}</template>
             </el-table-column>
             <el-table-column prop="homeDesc" label="主页描述"> 
             </el-table-column>
-            <el-table-column prop="age" label="年龄">
+            <el-table-column prop="age" label="年龄" width="80">
             </el-table-column>
             <el-table-column prop="lastDate" label="最近一次登录时间">
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button @click="operateUser('edit', scope.row)" type="text" size="small">编辑</el-button>
-                    <el-button type="text" @click="deleteRow(scope.row)" size="small">删除</el-button>
+                    <el-button @click="operateUser('edit', scope.row)" :disabled="!auth" type="text" size="small">编辑</el-button>
+                    <el-button type="text" @click="deleteRow(scope.row)" :disabled="!auth" size="small">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -34,6 +34,7 @@
     import { Table, TableColumn, Button, Message } from "element-ui"
     import userDialog from "@/components/Dialog/editNewUser.vue"
     import ajax from "@/libs/fench"
+    import { mapGetters } from "vuex"
     export default {
         name: "s-user",
         data() {
@@ -42,6 +43,9 @@
                 rowDetail: null,
                 tableData: [],
             }
+        },
+        computed: {
+            ...mapGetters(["auth"])
         },
         components: {
             "el-table": Table,
@@ -74,6 +78,7 @@
         },
         mounted() {
             this.getList();
+            console.log(this.auth)
 
         }
     }

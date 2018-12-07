@@ -3,8 +3,8 @@ const webpack = require("webpack");
 const fs = require("fs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 console.log(process.env.VUE_APP_API)
-let cesiumSource = "./node_modules/cesium/Source";
-let cesiumWorkers = "../Build/Cesium/Workers";
+// let cesiumSource = "./node_modules/cesium/Source";
+// let cesiumWorkers = "../Build/Cesium/Workers";
 
 
 function loadGlobalStyles() {
@@ -26,29 +26,29 @@ module.exports = {
             alias: {
                 '@': path.resolve(__dirname, './src'),
                 '@component': path.resolve(__dirname, './src/components'),
-                'cesium': path.resolve(__dirname, cesiumSource),
+                // 'cesium': path.resolve(__dirname, cesiumSource),
             }
         },
-        plugins: [
-            new CopyWebpackPlugin([{ from: path.join(cesiumSource, cesiumWorkers), to: 'static/Workers' }]),
-            new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Assets'), to: 'static/Assets' }]),
-            new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Widgets'), to: 'static/Widgets' }]),
-            new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'ThirdParty/Workers'), to: 'static/ThirdParty/Workers' }]),
-            new webpack.DefinePlugin({
-                CESIUM_BASE_URL: JSON.stringify('./static')
-            })
-        ],
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    commons: {
-                        name: 'Cesium',
-                        test: /[\\/]node_modules[\\/]cesium/,
-                        chunks: 'all'
-                    }
-                }
-            }
-        },
+        // plugins: [
+        //     new CopyWebpackPlugin([{ from: path.join(cesiumSource, cesiumWorkers), to: 'static/Workers' }]),
+        //     new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Assets'), to: 'static/Assets' }]),
+        //     new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Widgets'), to: 'static/Widgets' }]),
+        //     new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'ThirdParty/Workers'), to: 'static/ThirdParty/Workers' }]),
+        //     new webpack.DefinePlugin({
+        //         CESIUM_BASE_URL: JSON.stringify('./static')
+        //     })
+        // ],
+        // optimization: {
+        //     splitChunks: {
+        //         cacheGroups: {
+        //             commons: {
+        //                 name: 'Cesium',
+        //                 test: /[\\/]node_modules[\\/]cesium/,
+        //                 chunks: 'all'
+        //             }
+        //         }
+        //     }
+        // },
     },
     css: {
         extract: true,
@@ -64,7 +64,7 @@ module.exports = {
     devServer: {
         proxy: {
             "/api/": {
-                target: "http://193.112.89.63:8086/api/",
+                target: process.env.NODE_ENV == "production" ? "http://193.112.89.63:8086/api/" : "http://192.168.100.142:8086/api/",
                 changeOrigin: true,
                 pathRewrite: {
                     "^/api": ""

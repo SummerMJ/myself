@@ -63,8 +63,7 @@ export function getCookie(cookieName) {
  */
 export function deleteCookie(cookieName) {
     const exp = new Date();
-    exp.setTime(exp.getTime() - 1);
+    exp.setTime(exp.getTime() - 1000);
     var cval = getCookie(cookieName);
-    if (cval != null)
-        document.cookie = cookieName + "=" + cval + ";expires=" + exp.toGMTString();
+    if (cval != null) document.cookie = cookieName + "=" + cval + ";expires=" + exp.toGMTString() + "; path=/";
 }

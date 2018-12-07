@@ -97,7 +97,6 @@ public class UserController {
     @RequestMapping(value = "/login" ,method = { RequestMethod.POST, RequestMethod.GET })
     public Map<String, Object> login (String userName, String password, HttpServletResponse httpResponse) throws Exception {
         User user = userService.login(userName, password);
-
         Map<String, Object> map = new HashMap<>();
         try {
             if (user != null) {
@@ -105,6 +104,12 @@ public class UserController {
                 cookie.setPath("/");
                 cookie.setMaxAge(60*60);
                 httpResponse.addCookie(cookie);
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dateString = sdf.format(date);
+                Date currTime = sdf.parse(dateString);
+                user.setLastDate(currTime);
+                userService.update(user);
                 map.put("code", 200);
                 map.put("data", user);
                 map.put("msg", "登录成功");

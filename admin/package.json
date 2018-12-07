@@ -12,6 +12,7 @@
     "@types/cesium": "^1.47.3",
     "axios": "^0.18.0",
     "cesium": "^1.51.0",
+    "echarts": "^4.2.0-rc.2",
     "element-ui": "^2.4.11",
     "strip-pragma-loader": "^1.0.0",
     "vue": "^2.5.17",

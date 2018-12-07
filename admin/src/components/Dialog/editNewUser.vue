@@ -7,7 +7,7 @@
                     <el-form-item label="用户名" prop="userName">
                         <el-input v-model="form.userName"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码" prop="password">
+                    <el-form-item label="密码" prop="password" v-if="!rowDetail">
                         <el-input v-model="form.password" type="password"></el-input>
                     </el-form-item>
                     <el-form-item label="姓名" prop="userName">
@@ -67,7 +67,7 @@
             add() {
                 let url = "";
                 if (this.rowDetail) {
-                    url = "upadte";
+                    url = "update";
                 } else {
                     url = "add";
                 }
