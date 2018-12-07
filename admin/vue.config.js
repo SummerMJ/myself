@@ -15,7 +15,7 @@ function loadGlobalStyles() {
 
 
 module.exports = {
-    baseUrl: process.env.NODE_ENV == "production" ? "/" : "/",
+    baseUrl: process.env.NODE_ENV == "production" ? "/admin" : "/",
     outputDir: "dist",
     assetsDir: "./",
     filenameHashing: false,
