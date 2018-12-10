@@ -14,8 +14,10 @@
     "cesium": "^1.51.0",
     "echarts": "^4.2.0-rc.2",
     "element-ui": "^2.4.11",
+    "highlight.js": "^9.13.1",
     "strip-pragma-loader": "^1.0.0",
     "vue": "^2.5.17",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

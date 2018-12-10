@@ -38,7 +38,27 @@ const router = new Router({
             }, {
                 path: "artical",
                 name: "Artical",
-                component: () => import('./views/ArticalManager.vue')
+                component: () => import('./views/Artical/dashboard.vue'),
+                redirect: "artical/list",
+                children: [
+                {
+                    path: "list",
+                    name: "ArticalList",
+                    component: () => import("./views/Artical/list.vue")
+                }, {
+                    path: "new",
+                    name: "newArticall",
+                    component: () => import("./views/Artical/operate.vue")
+                },
+                {
+                    path: "edit/:id",
+                    name: "editArtical",
+                    component: () => import("./views/Artical/operate.vue")
+                },{
+                    path: "detail/:id",
+                    name: "checkArtical",
+                    component: () => import("./views/Artical/detail.vue")
+                }]
             }, {
                 path: "message",
                 name: "Message",
@@ -53,24 +73,24 @@ router.beforeEach((to, from, next) => {
     const session = utils.getCookie("ticket");
     console.log(session);
     const path = to.path;
-    if (to.path == "/login") {        
+    if (to.path == "/login") {
         if (session) {
             router.push("/home/dashboard");
         } else {
             next();
-        }    
-        return;              
+        }
+        return;
     }
-    if (session) {        
+    if (session) {
         console.log(session)
         store.commit("setUserInfo", JSON.parse(localStorage.getItem("userInfo")));
         if (path === "/") {
-            next({path: "/home/dashboard"});
+            next({ path: "/home/dashboard" });
         } else {
             next();
-        }        
+        }
     } else {
-        next({path: "/login"});
+        next({ path: "/login" });
     }
     // next();
 })

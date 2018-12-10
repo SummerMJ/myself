@@ -20,24 +20,29 @@ public class Artical implements Serializable {
     private String aTitle;
 
     @Column(name = "a_type")
-    private Integer aType;
+    private String aType;
 
     @Column(name = "a_content")
     private String aContent;
 
     @Column(name = "create_person")
-    private Integer createPerson;
+    private String createPerson;
 
-    @Column(name = "create_time")
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "create_time")
     private Date createTime;
 
-    public Artical(String aTitle, Integer aType, String aContent, Integer createPerson, Date createTime) {
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "last_time")
+    private Date lastTime;
+
+    public Artical(String aTitle, String aType, String aContent, String createPerson, Date createTime, Date lastTime) {
         this.aTitle = aTitle;
         this.aType = aType;
         this.aContent = aContent;
         this.createPerson = createPerson;
         this.createTime = createTime;
+        this.lastTime = lastTime;
     }
 
     public Artical() {}
@@ -50,19 +55,23 @@ public class Artical implements Serializable {
 
     public void setaTitle(String aTitle) { this.aTitle = aTitle; }
 
-    public Integer getaType() { return aType; }
+    public String getaType() { return aType; }
 
-    public void setaType(Integer aType) { this.aType = aType; }
+    public void setaType(String aType) { this.aType = aType; }
 
     public String getaContent() { return aContent; }
 
     public void setaContent(String aContent) { this.aContent = aContent; }
 
-    public Integer getCreatePerson() { return createPerson; }
+    public String getCreatePerson() { return createPerson; }
 
-    public void setCreatePerson(Integer createPerson) { this.createPerson = createPerson; }
+    public void setCreatePerson(String createPerson) { this.createPerson = createPerson; }
 
     public Date getCreateTime() { return createTime; }
 
     public void setCreateTime(Date createTime) { this.createTime = createTime; }
+
+    public Date getLastTime() { return lastTime; }
+
+    public void setLastTime(Date lastTime) { this.lastTime = lastTime; }
 }

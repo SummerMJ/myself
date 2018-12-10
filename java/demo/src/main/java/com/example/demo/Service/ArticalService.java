@@ -12,7 +12,11 @@ public interface ArticalService {
      */
     List<Artical> getList();
 
+    void add (Artical artical);
+
     Artical getArtical(Integer id);
 
     void delete(Integer id);
+
+    void update(Artical artical);
 }

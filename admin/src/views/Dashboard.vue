@@ -64,6 +64,11 @@
                 ]
             }
         },
+        methods: {
+            gotoIssues () {
+                
+            }
+        },
         computed: {
             ...mapGetters(["userInfo"])
         }

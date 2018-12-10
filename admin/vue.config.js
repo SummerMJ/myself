@@ -64,7 +64,7 @@ module.exports = {
     devServer: {
         proxy: {
             "/api/": {
-                target: process.env.NODE_ENV == "production" ? "http://193.112.89.63:8086/api/" : "http://192.168.100.142:8086/api/",
+                target: process.env.NODE_ENV == "production" ? "http://193.112.89.63:8086/api/" : "http://192.168.100.142:8086/",
                 changeOrigin: true,
                 pathRewrite: {
                     "^/api": ""
