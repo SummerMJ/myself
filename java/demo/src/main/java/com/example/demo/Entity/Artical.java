@@ -13,7 +13,7 @@ public class Artical implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name= "id", unique = true, nullable = true)
+    @Column(name= "id", unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "a_title")
@@ -36,14 +36,7 @@ public class Artical implements Serializable {
     @Column(name = "last_time")
     private Date lastTime;
 
-    public Artical(String aTitle, String aType, String aContent, String createPerson, Date createTime, Date lastTime) {
-        this.aTitle = aTitle;
-        this.aType = aType;
-        this.aContent = aContent;
-        this.createPerson = createPerson;
-        this.createTime = createTime;
-        this.lastTime = lastTime;
-    }
+
 
     public Artical() {}
 

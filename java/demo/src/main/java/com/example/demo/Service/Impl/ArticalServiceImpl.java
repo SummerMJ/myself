@@ -42,4 +42,9 @@ public class ArticalServiceImpl implements ArticalService {
     public void update(Artical artical) {
         articalRepository.saveAndFlush(artical);
     }
+
+    @Override
+    public void batchDelete(List<Integer> ids) {
+        articalRepository.deleteByIds(ids);
+    }
 }

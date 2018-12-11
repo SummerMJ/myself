@@ -18,5 +18,7 @@ public interface ArticalService {
 
     void delete(Integer id);
 
+    void batchDelete(List<Integer> ids);
+
     void update(Artical artical);
 }

@@ -27,19 +27,17 @@ axios.interceptors.request.use(config => {
 });
 
 axios.interceptors.response.use(response => {
-    if (response && response.data.code == 200) {
-        // store.commit("HIDELOADING");
-        return response;
-    } else if (response) {
-        console.log(response)
-        Message({
-            message: response.data.msg,
-            type: 'warning'
-        });
-        // store.commit("HIDELOADING");
-        return response;
+    if (response) {
+        if (response.data.code == 200) {
+            // store.commit("HIDELOADING");
+            return response;
+        } else if (response) {
+            Message.warning(response.data.msg);
+            return false;
+            // store.commit("HIDELOADING");
+            // return response;
+        }
     }
-
 }, error => {
     store.commit("HIDELOADING");
     let text = "服务器错误,请稍后重试...";
@@ -67,7 +65,7 @@ export function post(url, param) {
     return new Promise((resolve, reject) => {
         axios.post(url, param)
             .then(res => {
-                resolve(res.data);
+                res && resolve(res.data);
             }, err => {
                 reject(err);
             })

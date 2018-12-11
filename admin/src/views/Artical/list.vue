@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import { Breadcrumb, BreadcrumbItem, Table, TableColumn, Button } from "element-ui";
+    import { Breadcrumb, BreadcrumbItem, Table, TableColumn, Button, Message } from "element-ui";
     import { mapGetters } from "vuex"
     import ajax from "@/libs/fench"
     export default {
@@ -69,8 +69,13 @@
                     }
                 })
             },
-            deleteRow() {
-
+            deleteRow(item) {
+                console.log(item.id);
+                ajax.post("/artical/delete", { id: item.id }).then(res => {
+                    console.log(res)
+                    Message.success("删除成功");
+                    this.getList();
+                })
             },
             handleSelectionChange (val) {
                 this.selectList = val;

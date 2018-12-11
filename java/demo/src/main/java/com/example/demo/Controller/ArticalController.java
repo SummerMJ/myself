@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @CrossOrigin
 @RestController
 @RequestMapping("/artical")
@@ -28,6 +27,7 @@ public class ArticalController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+
     @RequestMapping("getList")
     public Map<String, Object> getArticalList () {
         Map<String, Object> map = new HashMap<>();
@@ -41,6 +41,7 @@ public class ArticalController {
         }
         return map;
     }
+
 
     @RequestMapping(value = "getOne")
     public Map<String, Object> getOneArtical (Integer id) {
@@ -60,6 +61,7 @@ public class ArticalController {
         }
         return map;
     }
+
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public Map<String, Object> addArtical (Artical artical) {
@@ -84,6 +86,7 @@ public class ArticalController {
         return map;
     }
 
+
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public Map<String, Object> updateArtical (Artical artical) {
         Map<String, Object> map = new HashMap<>();
@@ -106,4 +109,42 @@ public class ArticalController {
         return map;
     }
 
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Map<String, Object> deleteArtical(@RequestParam Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            articalService.delete(id);
+            map.put("code", 200);
+            map.put("success", true);
+            map.put("msg", "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code", 100);
+            map.put("success", false);
+            map.put("msg", "删除失败");
+        }
+        return map;
+    }
+
+
+    @RequestMapping(value = "batchDelete", method = RequestMethod.POST)
+    public Map<String, Object> batchDelete (@RequestParam List<Integer> ids) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            articalService.batchDelete(ids);
+            map.put("code", 200);
+            map.put("success", true);
+            map.put("msg", "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("code", 100);
+            map.put("success", false);
+            map.put("msg", "删除失败");
+        }
+        return map;
+    }
+
 }
+
+
