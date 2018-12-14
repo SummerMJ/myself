@@ -19,6 +19,9 @@ public class Artical implements Serializable {
     @Column(name = "a_title")
     private String aTitle;
 
+    @Column(name = "status")
+    private Integer status;
+
     @Column(name = "a_type")
     private String aType;
 
@@ -39,6 +42,16 @@ public class Artical implements Serializable {
 
 
     public Artical() {}
+
+    public Artical(String aTitle, Integer status, String aType, String aContent, String createPerson, Date createTime, Date lastTime) {
+        this.aTitle = aTitle;
+        this.status = status;
+        this.aType = aType;
+        this.aContent = aContent;
+        this.createPerson = createPerson;
+        this.createTime = createTime;
+        this.lastTime = lastTime;
+    }
 
     public Integer getId() { return id; }
 
@@ -67,4 +80,12 @@ public class Artical implements Serializable {
     public Date getLastTime() { return lastTime; }
 
     public void setLastTime(Date lastTime) { this.lastTime = lastTime; }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

@@ -129,7 +129,7 @@ public class ArticalController {
 
 
     @RequestMapping(value = "batchDelete", method = RequestMethod.POST)
-    public Map<String, Object> batchDelete (@RequestParam List<Integer> ids) {
+    public Map<String, Object> batchDelete (List<Integer> ids) {
         Map<String, Object> map = new HashMap<>();
         try {
             articalService.batchDelete(ids);
