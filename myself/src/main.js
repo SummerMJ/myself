@@ -8,6 +8,7 @@ import './assets/css/base.css'
 import store from './vuex/store'
 import './components/componentsRegister'
 import axios from 'axios'
+import 'iview/dist/styles/iview.css';
 
 Vue.prototype.$axios = axios
 // Vue.use(iView);

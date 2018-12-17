@@ -16,7 +16,7 @@
 </script>
 <style lang="scss" scoped>
     .ylc-headers {
-        height: 100px;
+        height: 100%;
         background: #fff;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
         .header-wrapper { 

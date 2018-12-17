@@ -17,7 +17,7 @@ public interface ArticalRepository extends JpaRepository<Artical, String> {
     public void deleteById(Integer id);
 
     @Transactional
-    @Query(value = "DELETE FROM artical s WHERE s.id IN (?1)")
+    @Query(value = "DELETE FROM `artical` s WHERE s.id IN (?1)", nativeQuery = true)
     @Modifying
     public void deleteByIds(List<Integer> ids);
 }

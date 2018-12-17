@@ -1,62 +1,104 @@
+import Vue from "vue"
 import axios from "axios";
-import  qs from "qs";
-require('es6-promise').polyfill();
+import qs from "qs"
+import store from "../vuex/store"
+import { Message, LoadingBar } from "iview"
+// import { resolve } from "dns";
 
-//axios 配置
-axios.defaults.timeout = 5000;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// Vue.prototype.$axios = axios;
+Vue.component("LoadingBar", LoadingBar);
 
+let cancel, promiseArr = {};
 
-function ajax(type, url, options) {
+axios.defaults.timeout = 5000; //响应时间
+axios.defaults.withCredentials = true; 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
+axios.defaults.baseURL = "/api"; //配置接口地址
+// axios.defaults.baseURL = process.env.VUE_APP_API + "/api";   //配置接口地址
+
+//axios拦截
+axios.interceptors.request.use(config => {
+    LoadingBar.start();
+    //发送请求的时候,取消相同的请求
+    if (promiseArr[config.url]) promiseArr[config.url]("取消请求");
+    promiseArr[config.url] = cancel;
+
+    if (config.method == "post") config.data = qs.stringify(config.data);
+    // store.commit("SHOWLOADING");
+    return config;
+}, error => {
+    return Promise.reject(error);
+});
+
+axios.interceptors.response.use(response => {
+    if (response) {
+        if (response.data.code == 200) {
+            // store.commit("HIDELOADING");
+            LoadingBar.finish();
+            return response;
+        } else if (response) {
+            Message.warning(response.data.msg);
+            LoadingBar.error();
+            return false;
+            // store.commit("HIDELOADING");
+            // return response;
+        }
+    }
+}, error => {
+    // store.commit("HIDELOADING");
+    let text = "服务器错误,请稍后重试...";
+    if (error.response) {
+        switch (error.response.status) {
+            case "500":
+                text = "服务器错误,请稍后重试...";
+                break;
+            case "400":
+                text = "请求未响应,请重试....";
+                break;
+            case "404":
+                text = "资源找不到,请重试....";
+                break;
+            default:
+                text = "服务器错误,请稍后重试...";
+                break;
+        }
+    }
+    Message.error(text);
+    return Promise.reject(error)
+});
+
+export function post(url, param) {
     return new Promise((resolve, reject) => {
-        axios({
-            method: type, 
-            url: url,
-            params: type === 'POST' ? null : options,
-            data: type === 'POST' ? qs.stringify(options) : ""
-        })
-        .then(_res => {
-            if (200 === _res.status) {
-                resolve(_res.data);
-            } else {
-                reject("request error in" + url);
-            }
-        })
-        .catch((err) => {
-            reject(err);
-        })
+        axios.post(url, param)
+            .then(res => {
+                res && resolve(res.data);
+            }, err => {
+                reject(err);
+            })
+            .catch(err => {
+                reject(err);
+            })
     })
 }
 
-const config = {
-    get(url, options) {
-        return new Promise((resolve, reject) => {
-            ajax("GET", url, options).then((data) => {
-                resolve(data);
-            })
-            .catch((err) => {
+export function get(url, param) {
+    return new Promise((resolve, reject) => {
+        axios.get(url, { params: param })
+            .then(res => {
+                resolve(res.data);
+            }, err => {
                 reject(err);
             })
-        })
-    },
-    post(url, options) {
-        return new Promise((resolve, reject) => {
-            ajax("POST", url, options).then((data) => {
-                resolve(data);
+            .catch(error => {
+                reject(error);
             })
-            .catch((err) => {
-                reject(err);
-            })
-        })
-    }
+    })
 }
 
 export default {
-    config: config,
-    //获取文章列表
-    getArtical (param) {
-        return config.get('/api/getArtical', param);
+    get(url, params) {
+        return get(url, params);
     },
-    
+    post(url, param) {
+        return post(url, param)
+    }
 }
