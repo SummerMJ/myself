@@ -1,14 +1,12 @@
 <template>
     <div class="ylc-headers clearfix">
-        <div class="header-item"><i class="iconfont icon-shouye"></i>Home</div>
-        <div class="header-item"><i class="iconfont icon-me"></i>ABOUT</div>
-        <div class="header-item">
-            <div class="img-wrapper">
-                <img src="../assets/images/me.jpeg" alt="me">
+        <div class="header-wrapper">
+            <div class="logo">Summer</div>
+            <div class="type-list">
+                <p>归档</p>
+                <p>关于</p>
             </div>
         </div>
-        <div class="header-item"><i class="iconfont icon-emojifill"></i>NOTHING</div>
-        <div class="header-item"><i class="iconfont icon-yijianfankui"></i>COMMENT</div>
     </div>
 </template>
 <script>
@@ -19,46 +17,21 @@
 <style lang="scss" scoped>
     .ylc-headers {
         height: 100px;
-        line-height: 100px;
-        // width: 1200px;
-        margin: 50px auto ;
-        // border: 1px solid #ccc;
-        // background: #ccc;
-        .header-item {
-            float: left;
+        background: #fff;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+        .header-wrapper { 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 800px;
             height: 100%;
-            width: 20%;
-            text-align: center;
-            position: relative;
-            font-weight: bold;
-            color: #fff;
-            cursor: pointer;
-            font-size: 22px;
-            i { font-size: 150%; margin-right: 10px; vertical-align: sub; }
-            &:hover {
-                color: #ffd;
-            }
-            .img-wrapper {
-                position: absolute;
-                top: -15px;
-                left: 50%;
-                transform: translateX(-50%);
-                height: 130px;
-                width: 130px; 
-                border-radius: 100px;
-                overflow: hidden;
-                img { 
-                    position: absolute;
-                    left: -10px;
-                    height: 160px; 
-                    transition: all .25s ease-in-out;
-                    &:hover {
-                        transform: scale(1.1);
-                        transition: all .25s ease-in-out;
-                    }
+            margin: 0 auto;
+            .logo { font-size: 26px; }
+            .type-list {display: flex; align-items: center;
+                p { font-size: 16px;
+                    &:not(:last-child) { margin-right: 30px; }
                 }
             }
-
         }
     }
 </style>
