@@ -7,11 +7,15 @@ import './assets/css/reset.css'
 import './assets/css/base.css'
 import store from './vuex/store'
 import './components/componentsRegister'
-import axios from 'axios'
 import 'iview/dist/styles/iview.css';
-
-Vue.prototype.$axios = axios
+import { axios } from "./fetch/api"
 // Vue.use(iView);
+
+window.onkeydown = function () {
+  if (event.keyCode == 13) console.log(1231231)
+}
+
+
 
 Vue.config.productionTip = false
 

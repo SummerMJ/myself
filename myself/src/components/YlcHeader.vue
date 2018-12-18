@@ -1,9 +1,9 @@
 <template>
     <div class="ylc-headers clearfix">
         <div class="header-wrapper">
-            <div class="logo">Summer</div>
+            <div class="logo" @click="$router.push('/')">Summer</div>
             <div class="type-list">
-                <p>归档</p>
+                <p @click="$router.push('/resume')">归档</p>
                 <p>关于</p>
             </div>
         </div>
@@ -26,9 +26,9 @@
             width: 800px;
             height: 100%;
             margin: 0 auto;
-            .logo { font-size: 26px; }
+            .logo { font-size: 26px; cursor: pointer; }
             .type-list {display: flex; align-items: center;
-                p { font-size: 16px;
+                p { font-size: 16px; cursor: pointer;
                     &:not(:last-child) { margin-right: 30px; }
                 }
             }

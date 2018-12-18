@@ -6,10 +6,12 @@
         </div>
         <div class="contact-me">
         	<div class="item">
-        		<i class="iconfont icon-dianhua"></i><span>13648891564</span>	
+        		<i class="iconfont icon-dianhua"></i>
+				<span>13648891564</span>	
         	</div>
         	<div class="item">
-        		<i class="iconfont icon-youxiang"></i><span>summeraric@163.com</span>	
+        		<i class="iconfont icon-youxiang"></i>
+				<span>summeraric@163.com</span>	
         	</div>
         </div>
     </div>
@@ -38,16 +40,17 @@ export default {
 			}
 
 		}
-		.name-desc { display: flex; align-items: flex-end;
+		.name-desc { display: flex; align-items: baseline;
 			h1 { font-size: 30px; margin-right: 10px;}
 			p { color: #666; }
 		}
 		.contact-me { display: flex; align-items: center;
-			.item { margin-right: 25px; cursor: pointer;
+			.item { margin-right: 25px; cursor: pointer; display: flex; align-items: center;
 				&:hover { 
 					i { color: @blue; }
 				}
-				i { font-size: 18px; color: #ccc; margin-right: 5px; }
+				i { font-size: 18px; color: #ccc; margin-right: 10px; }
+				span { font-size: 14px; letter-spacing: 2px; }
 			}
 			
 

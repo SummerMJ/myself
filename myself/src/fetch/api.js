@@ -1,104 +1,131 @@
-import Vue from "vue"
-import axios from "axios";
+import Vue from 'vue'
 import qs from "qs"
-import store from "../vuex/store"
-import { Message, LoadingBar } from "iview"
-// import { resolve } from "dns";
-
-Vue.component("LoadingBar", LoadingBar);
-
-let cancel, promiseArr = {};
-
-axios.defaults.timeout = 5000; //响应时间
-axios.defaults.withCredentials = true; 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
+import axios from 'axios'
+//取消请求
+let CancelToken = axios.CancelToken;
+// 请求超时的时间限制
+axios.defaults.timeout = 20000
+axios.defaults.headers.post[ 'Content-Type' ] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
 axios.defaults.baseURL = "/api"; //配置接口地址
-// axios.defaults.baseURL = process.env.VUE_APP_API + "/api";   //配置接口地址
+// 开始设置请求 发起的拦截处理
+// config 代表发起请求的参数的实体
+axios.interceptors.request.use( config => {
+    // 得到参数中的 requestName 字段，用于决定下次发起请求，取消对应的 相同字段的请求
+    // 如果没有 requestName 就默认添加一个 不同的时间戳
+    let requestName
+    if ( config.method === 'post' ) {
+        if ( config.data && config.data.requestName ) {
+            config.data = qs.stringify( config.data );
+            requestName = config.data.requestName
 
-//axios拦截
-axios.interceptors.request.use(config => {
-    LoadingBar.start();
-    //发送请求的时候,取消相同的请求
-    if (promiseArr[config.url]) promiseArr[config.url]("取消请求");
-    promiseArr[config.url] = cancel;
-
-    if (config.method == "post") config.data = qs.stringify(config.data);
-    // store.commit("SHOWLOADING");
-    return config;
-}, error => {
-    return Promise.reject(error);
-});
-
-axios.interceptors.response.use(response => {
-    if (response) {
-        if (response.data.code == 200) {
-            // store.commit("HIDELOADING");
-            LoadingBar.finish();
-            return response;
-        } else if (response) {
-            Message.warning(response.data.msg);
-            LoadingBar.error();
-            return false;
-            // store.commit("HIDELOADING");
-            // return response;
+        } else {
+            requestName = new Date().getTime()
+        }
+    } else {
+        if ( config.params && config.params.requestName ) {
+            requestName = config.params.requestName
+        } else {
+            requestName = new Date().getTime()
         }
     }
+    // 判断，如果这里拿到的参数中的 requestName 在上一次请求中已经存在，就取消上一次的请求
+    if ( requestName ) {
+        if ( axios[ requestName ] && axios[ requestName ].cancel ) {
+            axios[ requestName ].cancel()
+        }
+        config.cancelToken = new CancelToken( c => {
+            axios[ requestName ] = {}
+            axios[ requestName ].cancel = c
+        } )
+    }
+    return config
 }, error => {
-    // store.commit("HIDELOADING");
-    let text = "服务器错误,请稍后重试...";
-    if (error.response) {
-        switch (error.response.status) {
-            case "500":
-                text = "服务器错误,请稍后重试...";
-                break;
-            case "400":
-                text = "请求未响应,请重试....";
-                break;
-            case "404":
-                text = "资源找不到,请重试....";
-                break;
+    return Promise.reject( error )
+} )
+
+// 请求到结果的拦截处理
+axios.interceptors.response.use( config => {
+    // 返回请求正确的结果
+    return config
+}, error => {
+    // 错误的请求结果处理，这里的代码根据后台的状态码来决定错误的输出信息
+    if ( error && error.response ) {
+        switch ( error.response.status ) {
+            case 400:
+                error.message = '错误请求'
+                break
+            case 401:
+                error.message = '未授权，请重新登录'
+                break
+            case 403:
+                error.message = '拒绝访问'
+                break
+            case 404:
+                error.message = '请求错误,未找到该资源'
+                break
+            case 405:
+                error.message = '请求方法未允许'
+                break
+            case 408:
+                error.message = '请求超时'
+                break
+            case 500:
+                error.message = '服务器端出错'
+                break
+            case 501:
+                error.message = '网络未实现'
+                break
+            case 502:
+                error.message = '网络错误'
+                break
+            case 503:
+                error.message = '服务不可用'
+                break
+            case 504:
+                error.message = '网络超时'
+                break
+            case 505:
+                error.message = 'http版本不支持该请求'
+                break
             default:
-                text = "服务器错误,请稍后重试...";
-                break;
+                error.message = `连接错误${error.response.status}`
         }
+    } else {
+        error.message = "连接到服务器失败"
     }
-    Message.error(text);
-    return Promise.reject(error)
-});
-
-export function post(url, param) {
-    return new Promise((resolve, reject) => {
-        axios.post(url, param)
-            .then(res => {
-                res && resolve(res.data);
-            }, err => {
-                reject(err);
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
+    return Promise.reject( error.message )
+} )
+// 将axios 的 post 方法，绑定到 vue 实例上面的 $post
+Vue.prototype.$post = function ( url, params ) {
+    return new Promise( ( resolve, reject ) => {
+        axios.post( url, params )
+            .then( res => {
+                resolve( res.data )
+            } ).catch( err => {
+                reject( err )
+            } )
+    } )
 }
-
-export function get(url, param) {
-    return new Promise((resolve, reject) => {
-        axios.get(url, { params: param })
-            .then(res => {
-                resolve(res.data);
-            }, err => {
-                reject(err);
-            })
-            .catch(error => {
-                reject(error);
-            })
-    })
+// 将axios 的 get 方法，绑定到 vue 实例上面的 $get
+Vue.prototype.$get = function ( url, params ) {
+    return new Promise( ( resolve, reject ) => {
+        axios.get( url, {
+            params: params
+        } ).then( res => {
+            resolve( res.data ) // 返回请求成功的数据 data
+        } ).catch( err => {
+            reject( err )
+        } )
+    } )
 }
+// 请求示例
+// requestName 为多余的参数 作为请求的标识，下次发起相同的请求，就会自动取消上一次还没有结束的请求
+// 比如正常的请求参数只有一个 name: '123'，但是这里我们需要额外再加上一个 requestName
+/**
+    this.$post(url, { name: '123', requestName: 'post_1' })
+        .then(res => {
+            console.log(`请求成功：${res}`)
+        })
+ */
 
-export default {
-    get(url, params) {
-        return get(url, params);
-    },
-    post(url, param) {
-        return post(url, param)
-    }
-}
+export default axios
