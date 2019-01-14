@@ -17,11 +17,11 @@ const router = new Router({
             name: 'Login',
             component: () => import('./views/Login.vue')
         },
-        // {
-        //     path: "/cesium",
-        //     name: "Cesium",
-        //     component: () => import('./views/Cesium.vue')
-        // },
+        {
+            path: "/cesium",
+            name: "Cesium",
+            component: () => import('./views/Cesium.vue')
+        },
         {
             path: "/home",
             name: "Home",
@@ -68,31 +68,31 @@ const router = new Router({
     ]
 })
 
-router.beforeEach((to, from, next) => {
-
-    const session = utils.getCookie("ticket");
-    console.log(session);
-    const path = to.path;
-    if (to.path == "/login") {
-        if (session) {
-            router.push("/home/dashboard");
-        } else {
-            next();
-        }
-        return;
-    }
-    if (session) {
-        console.log(session)
-        store.commit("setUserInfo", JSON.parse(localStorage.getItem("userInfo")));
-        if (path === "/") {
-            next({ path: "/home/dashboard" });
-        } else {
-            next();
-        }
-    } else {
-        next({ path: "/login" });
-    }
-    // next();
-})
+// router.beforeEach((to, from, next) => {
+//
+//     const session = utils.getCookie("ticket");
+//     console.log(session);
+//     const path = to.path;
+//     if (to.path == "/login") {
+//         if (session) {
+//             router.push("/home/dashboard");
+//         } else {
+//             next();
+//         }
+//         return;
+//     }
+//     if (session) {
+//         console.log(session)
+//         store.commit("setUserInfo", JSON.parse(localStorage.getItem("userInfo")));
+//         if (path === "/") {
+//             next({ path: "/home/dashboard" });
+//         } else {
+//             next();
+//         }
+//     } else {
+//         next({ path: "/login" });
+//     }
+//     // next();
+// })
 
 export default router;

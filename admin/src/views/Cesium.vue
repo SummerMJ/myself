@@ -85,17 +85,29 @@ export default {
             geocoder: false,
             navigationHelpButton: false,
             timeLine: false,
-            // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-            //     url:
-            //         "https://services.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer"
-            // }),
+            imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+                url:
+                    "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+            }),
             baseLayerPicker: false,
             infoBox: false
         });
+        let promise= this.viewer.dataSources.add(Cesium.GeoJsonDataSource.load(require('../json/province.json'), {
+            stroke: Cesium.Color.BLACK,
+            // fill: Cesium.Color.RED,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        }));
+        this.viewer.flyTo(promise);
+        this.add();
         // setTimeout(() => {
         //     this.cameraFly();
         // }, 2000);
-        
+        console.log(i)
+        for (var i = 0; i < 5 ; i ++) {
+            console.log(i)
+        }
+        console.log(i)
     }
 };
 </script>
