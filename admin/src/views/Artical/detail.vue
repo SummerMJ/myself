@@ -14,7 +14,7 @@
 
         <div class="quill-editor">
             <div class="ql-container ql-snow">
-                <div class="ql-editor" v-html="smjObj.aContent" v-highlight></div>
+                <div class="ql-editor" v-html="smjObj.aContent"></div>
             </div>
         </div>
     </div>

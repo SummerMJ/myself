@@ -44,7 +44,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+    .ql-snow .ql-editor pre { font-size: 18px;
+    }
 	#app {
 		position: absolute;
 		width: 100%;

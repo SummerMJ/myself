@@ -86,8 +86,7 @@ export default {
             navigationHelpButton: false,
             timeLine: false,
             imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-                url:
-                    "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+                url: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
             }),
             baseLayerPicker: false,
             infoBox: false

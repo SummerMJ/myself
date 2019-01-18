@@ -14,13 +14,19 @@
                 <el-input v-model="form.createPerson" placeholder="请填写文章作者"></el-input>
             </el-form-item>
             <el-form-item label="内容" prop="aContent">
-                <quill-editor v-model="form.aContent" ref="myQuillEditor" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"></quill-editor>
+                <quill-editor
+                        v-model="form.aContent"
+                        ref="myQuillEditor"
+                        :options="editorOption"
+                        @blur="onEditorBlur($event)"
+                        @focus="onEditorFocus($event)"
+                        @ready="onEditorReady($event)"
+                ></quill-editor>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">保存</el-button>
-                <router-link to="/home/artical/list">
-                    <el-button>取消</el-button>
-                </router-link>
+                <el-button @click="$router.push('/home/artical/list')">取消</el-button>
+                <span class="auto-save" v-show="isTyping">正在自动保存。。。</span>
             </el-form-item>
         </el-form>
     </div>
@@ -31,9 +37,9 @@
     import { mapGetters } from "vuex"
     import { quillEditor } from "vue-quill-editor"
     import { Form, FormItem, Select, Option, Input, Button, Message } from "element-ui"
-    // import 'quill/dist/quill.core.css'
-    // import 'quill/dist/quill.snow.css'
-    // import 'quill/dist/quill.bubble.css'
+    import 'quill/dist/quill.core.css'
+    import 'quill/dist/quill.snow.css'
+    import 'quill/dist/quill.bubble.css'
     import ajax from "@/libs/fench"
     import * as utils from "@/libs/utils"
     export default {
@@ -43,6 +49,9 @@
         },
         data() {
             return {
+                editorSetting:{
+                    height:200,
+                },
                 editorOption: {
                     modules: {
                         toolbar: [
@@ -53,7 +62,7 @@
                             [{ 'script': 'sub' }, { 'script': 'super' }],
                             [{ 'indent': '-1' }, { 'indent': '+1' }],
                             [{ 'direction': 'rtl' }],
-                            [{ 'size': ['small', false, 'large', 'huge'] }],
+                            [{ 'size': ['small', 'middle', false, 'large', 'huge'] }],
                             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                             [{ 'font': [] }],
                             [{ 'color': [] }, { 'background': [] }],
@@ -62,7 +71,9 @@
                             ['link', 'image', 'video']
                         ],
                         syntax: {
-                            highlight: text => hljs.highlightAuto(text).value
+                            highlight: text => {
+                                return hljs.highlightAuto(text).value;
+                            }
                         }
                     },
                 },
@@ -76,7 +87,10 @@
                     aTitle: [{ required: true, message: "标题一定要填啊!", trigger: "blur" }],
                     createPerson: [{ required: true, message: "作者一定要填啊!", trigger: "blur" }],
                     aContent: [{ required: true, message: "内容一定要填啊!", trigger: "blur" }]
-                }
+                },
+                isTyping: false,
+                autoSave: false,
+                interval: 0
             }
         },
         methods: {
@@ -89,14 +103,23 @@
             onEditorReady() {
 
             },
-            save() {
+            onDraft () {
+
+            },
+            saveAjax () {
                 let url = this.$route.params.id ? "update" : "add";
                 let form = utils.deepClone(this.form);
                 form.aType = form.aType.join(",");
-                ajax.post("/artical/" + url, form).then(res => {
-                    Message.success("成功!");
-                    this.$router.push("/home/artical/list");
+                return new Promise(resolve => {
+                    ajax.post("/artical/" + url, form).then(res => {
+                        resolve(res);
+                    })
                 })
+            },
+            async save() {
+                await this.saveAjax();
+                Message.success("成功!");
+                this.$router.push("/home/artical/list");
             },
             getOne() {
                 const id = this.$route.params.id;
@@ -117,6 +140,20 @@
             }
         },
         mounted() {
+            let _this = this;
+            window.addEventListener("keyup", function (e) {
+                clearInterval(_this.interval);
+                _this.isTyping = true;
+                _this.interval = setInterval( async () => {
+                    _this.isTyping = false;
+                    _this.autoSave = true;
+                    console.log("第几次")
+                    await _this.saveAjax();
+                    _this.autoSave = false;
+                    clearInterval(_this.interval);
+                }, 1500);
+
+            })
             if (this.$route.params.id) {
                 this.getOne();
             } else {
@@ -124,7 +161,7 @@
             }
         },
         components: {
-            quillEditor,
+            "quill-editor": quillEditor,
             "el-form": Form,
             "el-form-item": FormItem,
             "el-select": Select,
@@ -134,6 +171,25 @@
         }
     }
 </script>
+
+<style lang="scss">
+    .ql-editor .ql-size-large { font-size: 1.0rem; }
+    .quill-code {
+        border: none;
+        height: auto;
+        > code {
+            width: 100%;
+            margin: 0;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0;
+            height: 10rem;
+            overflow-y: auto;
+            resize: vertical;
+        }
+    }
+</style>
 
 <style lang="scss">
     .add-artical {
@@ -149,4 +205,8 @@
             width: 400px;
         }
     }
+</style>
+
+<style lang="scss" scoped>
+    .auto-save { margin-left: 20px; color: #CCC; transition: all 0.25s ease-in-out; }
 </style>

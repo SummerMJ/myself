@@ -18,14 +18,12 @@ h5,
 h6,
 p,
 blockquote,
-pre,
 a,
 abbr,
 acronym,
 address,
 big,
 cite,
-code,
 del,
 dfn,
 em,
@@ -91,6 +89,9 @@ video {
     font-family: "Microsoft Yahei", sans-serif, Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", STHeiti, "华文细黑";
     vertical-align: baseline;
 }
+
+pre, code { font-family: Consolas; }
+pre span { font-family: Consolas; }
 
 /* HTML5 display-role reset for older browsers */
 article,

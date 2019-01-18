@@ -9,9 +9,12 @@ import store from './vuex/store'
 import './components/componentsRegister'
 import 'iview/dist/styles/iview.css';
 import { axios } from "./fetch/api"
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import 'highlight.js/styles/rainbow.css' //样式文件
 // Vue.use(iView);
-
-window.onkeydown = function () {
+ window.onkeydown = function () {
   if (event.keyCode == 13) console.log(1231231)
 }
 

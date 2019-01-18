@@ -10,13 +10,14 @@ import 'quill/dist/quill.bubble.css'
 import * as filters from './libs/filters';
 import { Loading } from "element-ui"
 import hljs from 'highlight.js';
-import 'highlight.js/styles/googlecode.css' //样式文件
+import 'highlight.js/styles/rainbow.css' //样式文件
+// import 'highlight.js/styles/monokai-sublime.min.css';
 Vue.use(Loading.directive);
 Vue.directive('highlight',function (el) {
     let blocks = el.querySelectorAll('pre code');
     setTimeout(() =>{
         blocks.forEach((block)=>{
-        hljs.highlightBlock(block)
+            hljs.highlightBlock(block)
         })
     }, 200)
 })

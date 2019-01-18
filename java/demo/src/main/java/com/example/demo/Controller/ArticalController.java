@@ -15,7 +15,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/artical")
+@RequestMapping("/api/artical")
 public class ArticalController {
 
     @Autowired

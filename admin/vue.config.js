@@ -65,7 +65,7 @@ module.exports = {
         proxy: {
             "/api/": {
                 // target: process.env.NODE_ENV == "production" ? "http://193.112.89.63:8086/api/" : "http://192.168.0.101:8086/",
-                target: process.env.NODE_ENV == "production" ? "http://193.112.89.63:8086/" : "http://192.168.100.142:8086/",
+                target: process.env.NODE_ENV == "production" ? "http://193.112.89.63:8086/" : "http://192.168.100.142:8086/api/",
                 changeOrigin: true,
                 pathRewrite: {
                     "^/api": ""
