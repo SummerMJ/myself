@@ -1,9 +1,14 @@
 <template>
     <div class="artical-manager">
         <div class="operate-box">
-            <router-link to="/home/artical/new">
+            <div>
+              <router-link to="/home/artical/new">
                 <el-button size="small" type="primary" :disabled="!auth">添加文章</el-button>
-            </router-link>
+              </router-link>
+              <router-link to="/home/artical/markdown" style="margin-left: 15px;">
+                <el-button size="small" type="primary" :disabled="!auth">富文本编辑器</el-button>
+              </router-link>
+            </div>
             <el-button size="small" type="danger" :disabled="!selectList.length || !auth">批量删除</el-button>
         </div>
         <el-table :data="tableData" stripe border class="artical-table" size="small"  v-loading="loading" @selection-change="handleSelectionChange">

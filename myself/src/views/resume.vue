@@ -50,7 +50,7 @@
 	        	.left-img { margin-right: 30px;
 	        		img { width: 150px; height: 150px;  }
 	        	}
-	        	.right-wrapper { text-align: left; line-height: 25px;  }
+	        	.right-wrapper { text-align: left; line-height: 25px; font-size: 14px; }
 	        }
         }
         

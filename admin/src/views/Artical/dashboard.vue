@@ -33,7 +33,10 @@
                 } else if (to.name == "checkArtical") {
                     this.show = true;
                     this.type = "查看"
-                } else {
+                } else if(to.name == "Markdown") {
+                    this.show = true;
+                    this.type = "新建";
+                }else {
                     this.show = false;
                 }
             },

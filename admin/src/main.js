@@ -11,6 +11,9 @@ import * as filters from './libs/filters';
 import { Loading } from "element-ui"
 import hljs from 'highlight.js';
 import 'highlight.js/styles/rainbow.css' //样式文件
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+Vue.use(mavonEditor)
 // import 'highlight.js/styles/monokai-sublime.min.css';
 Vue.use(Loading.directive);
 Vue.directive('highlight',function (el) {

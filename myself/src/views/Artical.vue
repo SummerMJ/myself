@@ -3,8 +3,8 @@
         <div class="title">{{ smjObj.aTitle }}</div>
         <div class="line"></div>
         <div class="time-people">
-            <div class="flex">
-                <div>创建时间: </div>
+            <div class="flex content-title ">
+                <div>创建时间:  </div>
                 <div>{{ smjObj.createTime }}</div>
             </div>
             <div class="flex">
@@ -12,7 +12,6 @@
                 <div>{{ smjObj.createPerson }}</div>
             </div>
         </div>
-
         <div class="quill-editor">
             <div class="ql-container ql-snow">
                 <div class="ql-editor" v-html="smjObj.aContent"></div>
@@ -43,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .artical-detail { width: 800px; margin: 30px auto;}
+    .artical-detail { width: 800px; margin: 0 auto 30px; background: #fff; padding: 20px 10px;}
     .title {
         font-size: 26px;
         font-weight: bold;
@@ -55,7 +54,7 @@ export default {
         align-items: center;
         justify-content: space-around;
         margin-bottom: 30px;
-
+        font-size: 14px;
         .flex {
             display: flex;
             align-items: center;

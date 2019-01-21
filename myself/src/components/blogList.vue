@@ -35,7 +35,7 @@ export default {
 	},
 	mounted() {
 		this.$get("/artical/getList").then(res => {
-			this.list = res.data;
+			this.list = res.data || [];
             console.log(res)
 			this.spinShow = false; 
 		});

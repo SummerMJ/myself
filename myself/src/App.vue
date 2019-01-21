@@ -31,7 +31,7 @@ export default {
 	},
 	methods: {
 		handleScroll() {
-			this.$refs.viewBox.scrollTop > 100
+			this.$refs.viewBox.scrollTop > 250
 				? (this.show = true)
 				: (this.show = false);
 		}
@@ -45,8 +45,8 @@ export default {
 </script>
 
 <style lang="scss">
-    .ql-snow .ql-editor pre { font-size: 18px;
-    }
+    .ql-snow .ql-editor pre { font-size: 16px;}
+    .ql-editor .ql-size-large { font-size: 16px; }
 	#app {
 		position: absolute;
 		width: 100%;

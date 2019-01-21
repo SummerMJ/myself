@@ -49,6 +49,10 @@ const router = new Router({
                     path: "new",
                     name: "newArticall",
                     component: () => import("./views/Artical/operate.vue")
+                },{
+                    path: "markdown",
+                    name: "Markdown",
+                    component: () => import("./views/Artical/markdown.vue")
                 },
                 {
                     path: "edit/:id",
