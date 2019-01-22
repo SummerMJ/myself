@@ -54,7 +54,7 @@
         methods: {
             getList() {
                 ajax.get("/artical/getList").then(res => {
-                    this.tableData = res.data;
+                    this.tableData = res.data || [];
                     this.loading = false;
                 });
             },

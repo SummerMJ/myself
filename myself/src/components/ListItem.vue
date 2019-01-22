@@ -44,7 +44,7 @@
             .left-date {float: left; width: 100px;padding-left: 20px; box-sizing: border-box; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif}
             .right-content {margin-left: 100px; position: relative;
                 h2 { font-size: 16px; }
-                .blog-content { margin-top: 10px; line-height: 20px; height: 38px; overflow: hidden; line-height: 18px;position: relative;
+                .blog-content { margin-top: 10px; height: 38px; overflow: hidden; line-height: 18px;position: relative;
                     &::after {content: "";font-weight: bold; position: absolute;bottom: 1px;right: 0;width: 100px;height: 20px; background: linear-gradient(to right, transparent 30% , #fff 70%);}
                 }
             }

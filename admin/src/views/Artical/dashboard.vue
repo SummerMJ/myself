@@ -53,6 +53,7 @@
 </script>
 
 <style lang="scss" scoped>
+  .artical-manager { height: 100%; }
     .bread {
         margin-bottom: 20px;
     }

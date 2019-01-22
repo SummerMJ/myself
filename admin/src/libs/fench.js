@@ -32,7 +32,7 @@ axios.interceptors.response.use(response => {
             // store.commit("HIDELOADING");
             return response;
         } else if (response) {
-            Message.warning(response.data.msg);
+            // Message.warning(response.data.msg);
             return false;
             // store.commit("HIDELOADING");
             // return response;

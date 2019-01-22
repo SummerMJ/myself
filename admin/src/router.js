@@ -9,9 +9,9 @@ const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [{
-            path: '/',
-            redirect: 'login'
-        },
+        path: '/',
+        redirect: 'login'
+    },
         {
             path: '/login',
             name: 'Login',
@@ -31,43 +31,47 @@ const router = new Router({
                 name: "Dashboard",
                 component: () => import("./views/Dashboard.vue")
             },
-            {
-                path: "user",
-                name: "User",
-                component: () => import("./views/User.vue")
-            }, {
-                path: "artical",
-                name: "Artical",
-                component: () => import('./views/Artical/dashboard.vue'),
-                redirect: "artical/list",
-                children: [
                 {
-                    path: "list",
-                    name: "ArticalList",
-                    component: () => import("./views/Artical/list.vue")
+                    path: "user",
+                    name: "User",
+                    component: () => import("./views/User.vue")
                 }, {
-                    path: "new",
-                    name: "newArticall",
-                    component: () => import("./views/Artical/operate.vue")
+                    path: "artical",
+                    name: "Artical",
+                    component: () => import('./views/Artical/dashboard.vue'),
+                    redirect: "artical/list",
+                    children: [
+                        {
+                            path: "list",
+                            name: "ArticalList",
+                            component: () => import("./views/Artical/list.vue")
+                        }, {
+                            path: "new",
+                            name: "newArticall",
+                            component: () => import("./views/Artical/operate.vue")
+                        },{
+                            path: "markdown",
+                            name: "Markdown",
+                            component: () => import("./views/Artical/markdown.vue")
+                        },
+                        {
+                            path: "edit/:id",
+                            name: "editArtical",
+                            component: () => import("./views/Artical/operate.vue")
+                        },{
+                            path: "detail/:id",
+                            name: "checkArtical",
+                            component: () => import("./views/Artical/detail.vue")
+                        }]
+                }, {
+                    path: "setting",
+                    name: "Setting",
+                    component: () => import('./views/Setting/dashboard.vue')
                 },{
-                    path: "markdown",
-                    name: "Markdown",
-                    component: () => import("./views/Artical/markdown.vue")
-                },
-                {
-                    path: "edit/:id",
-                    name: "editArtical",
-                    component: () => import("./views/Artical/operate.vue")
-                },{
-                    path: "detail/:id",
-                    name: "checkArtical",
-                    component: () => import("./views/Artical/detail.vue")
+                    path: "message",
+                    name: "Message",
+                    component: () => import('./views/Message.vue')
                 }]
-            }, {
-                path: "message",
-                name: "Message",
-                component: () => import('./views/Message.vue')
-            }]
         }
     ]
 })

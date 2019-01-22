@@ -16,6 +16,10 @@
             <i class="el-icon-message"></i>
             <span slot="title">留言管理</span>
         </el-menu-item>
+        <el-menu-item index="/home/setting">
+            <i class="el-icon-setting"></i>
+            <span slot="title">基础设置</span>
+        </el-menu-item>
     </el-menu>
 </template>
 
