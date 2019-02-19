@@ -19,12 +19,28 @@
 				</div>
 			</div>
 		</div>
+        <div class="work-time">
+            <h1>我的工作经历</h1>
+            <time-line></time-line>
+        </div>
+        <div class="experience">
+            <h1>我的项目经验</h1>
+            <div class="project-wrapper">
+                <div class="project-item">
+
+                </div>
+            </div>
+        </div>
 		
 	</div>
 </template>
 <script>
+    import { TimelineItem, Timeline } from "iview"
 	export default {
-		name: "resume"
+		name: "resume",
+        components: {
+            TimelineItem, Timeline
+        }
 	}
 </script>
 
@@ -37,22 +53,22 @@
         	align-items: center;
         	padding-top: 50px;
         }
-        h1 { font-size: 40px; margin-bottom: 30px; }
+        h1 { font-size: 40px; margin-bottom: 30px; text-align: center; }
         .sub-title { color: #666; font-size: 20px; }
-        .education {
-        	background-color: #F8F8F8;
-        	text-align: center;
-        	padding: 30px 0;
-        	.education-wrapper {        
-	        	display: flex;
-	        	align-items: center;
-	        	justify-content: center;	        
+        .education { background-color: #F8F8F8; text-align: center; padding: 30px 0;
+        	.education-wrapper { display: flex; align-items: center; justify-content: center;
 	        	.left-img { margin-right: 30px;
 	        		img { width: 150px; height: 150px;  }
 	        	}
-	        	.right-wrapper { text-align: left; line-height: 25px; font-size: 14px; }
+	        	.right-wrapper { text-align: left; line-height: 25px; font-size: 16px; }
 	        }
         }
-        
+        .work-time { max-width: 800px; margin: 0 auto; padding: 30px 0; }
+        .experience { background: #fff; padding: 30px;
+            .project-wrapper { display: flex;
+                .project-item { width: 300px; height: 300px; border: 1px solid #ccc; }
+            }
+        }
+
     }
 </style>

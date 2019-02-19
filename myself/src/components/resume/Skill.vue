@@ -38,7 +38,7 @@
 			padding: 0 20px;
 			box-sizing: border-box;
 			overflow: hidden;
-			.item { height: 40px; line-height: 40px; padding-left: 15px;position: relative; margin-bottom: 25px; font-size: 14px;
+			.item { height: 40px; line-height: 40px; padding-left: 15px;position: relative; margin-bottom: 25px; font-size: 18px; font-family: Consolas;
 				&:before { content: ""; position: absolute; width: 3px; height: 100%; left: 0; top: 0; }
 				&.good { background-color: #D6EFFF; color: #3498DB;
 					&:before { background-color: #3498DB; }

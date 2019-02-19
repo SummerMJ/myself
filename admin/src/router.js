@@ -10,7 +10,7 @@ const router = new Router({
     base: process.env.BASE_URL,
     routes: [{
         path: '/',
-        redirect: 'login'
+        redirect: 'cesium'
     },
         {
             path: '/login',
@@ -76,29 +76,29 @@ const router = new Router({
     ]
 })
 
-router.beforeEach((to, from, next) => {
-
-    const session = utils.getCookie("ticket");
-    const path = to.path;
-    if (to.path == "/login") {
-        if (session) {
-            router.push("/home/dashboard");
-        } else {
-            next();
-        }
-        return;
-    }
-    if (session) {
-        store.commit("setUserInfo", JSON.parse(localStorage.getItem("userInfo")));
-        if (path === "/") {
-            next({ path: "/home/dashboard" });
-        } else {
-            next();
-        }
-    } else {
-        next({ path: "/login" });
-    }
-    // next();
-})
+// router.beforeEach((to, from, next) => {
+//
+//     const session = utils.getCookie("ticket");
+//     const path = to.path;
+//     if (to.path == "/login") {
+//         if (session) {
+//             router.push("/home/dashboard");
+//         } else {
+//             next();
+//         }
+//         return;
+//     }
+//     if (session) {
+//         store.commit("setUserInfo", JSON.parse(localStorage.getItem("userInfo")));
+//         if (path === "/") {
+//             next({ path: "/home/dashboard" });
+//         } else {
+//             next();
+//         }
+//     } else {
+//         next({ path: "/login" });
+//     }
+//     // next();
+// })
 
 export default router;

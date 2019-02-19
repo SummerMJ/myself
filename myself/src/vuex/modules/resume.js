@@ -17,7 +17,7 @@ const state = {
 			level: "2",
 			score: "75"
 		},{
-			name: "NodeJS",
+			name: "NodeJS、Java",
 			level: "3",
 			score: "70"
 		}

@@ -31,7 +31,7 @@ export default {
 	},
 	methods: {
 		handleScroll() {
-			this.$refs.viewBox.scrollTop > 250
+			this.$refs.viewBox.scrollTop > 100
 				? (this.show = true)
 				: (this.show = false);
 		}
