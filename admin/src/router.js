@@ -10,12 +10,17 @@ const router = new Router({
     base: process.env.BASE_URL,
     routes: [{
         path: '/',
-        redirect: 'cesium'
+        redirect: 'test'
     },
         {
             path: '/login',
             name: 'Login',
             component: () => import('./views/Login.vue')
+        },
+         {
+            path: '/test',
+            name: 'test',
+            component: () => import('./views/test.vue')
         },
         {
             path: "/cesium",

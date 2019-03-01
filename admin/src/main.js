@@ -14,6 +14,13 @@ import 'highlight.js/styles/rainbow.css' //样式文件
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 Vue.use(mavonEditor)
+
+import ss from "bigdata-view-plugin"
+import "bigdata-view-plugin/lib/bigdata-view-plugin.css"
+console.log(ss)
+
+Vue.use(ss);
+
 // import 'highlight.js/styles/monokai-sublime.min.css';
 Vue.use(Loading.directive);
 Vue.directive('highlight',function (el) {

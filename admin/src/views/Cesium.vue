@@ -40,8 +40,8 @@ export default {
                 position: Cesium.Cartesian3.fromDegrees(params.lng, params.lat),
                 label: {
                     text: params.name,
-                    font: "20px 微软雅黑",
-                    color: Cesium.Color.White,
+                    font: "15px 微软雅黑",
+                    color: Cesium.Color.RED,
                     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 3000000.0)
                     // pixelOffset: new Cesium.Cartesian2(0, 20 + _this.height)
                 }
@@ -83,12 +83,6 @@ export default {
                     pixelOffset: new Cesium.Cartesian2(0, -40),
                     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 3000000.0)
                 },
-                // label: {
-                //     text: "20000",
-                //     font: "30px 微软雅黑",
-                //     color: Cesium.Color.White,
-                //     eyeOffset: new Cesium.Cartesian3(0, 0, -20)
-                // }
             });
         },
         toggleHeatMap () {
@@ -160,12 +154,16 @@ export default {
             baseLayerPicker: false,
             infoBox: false
         });
-        let promise= this.viewer.dataSources.add(Cesium.GeoJsonDataSource.load(require('../json/province.json'), {
-            stroke: Cesium.Color.AQUA,
-            fill: Cesium.Color.TRANSPARENT,
-            strokeWidth: 50.0,
-            // markerSymbol: '?'
-        }));
+        let imagelary = new Cesium.ArcGisMapServerImageryProvider({
+            url: ' http://maps.ynmap.cn/MapService/c4828d25-8a04-40c4-86e4-fe5b6163e50e/img84/WMTS',
+        })
+        this.viewer.imageryLayers.addImageryProvider(imagelary);
+        // let promise= this.viewer.dataSources.add(Cesium.GeoJsonDataSource.load(require('../json/province.json'), {
+        //     stroke: Cesium.Color.AQUA,
+        //     fill: Cesium.Color.TRANSPARENT,
+        //     strokeWidth: 50.0,
+        //     // markerSymbol: '?'
+        // }));
         // this.viewer.flyTo(promise);
         this.add();
         // this.heatMap();
