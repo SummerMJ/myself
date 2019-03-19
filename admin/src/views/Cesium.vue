@@ -1,9 +1,9 @@
 <template>
-    <div ref="box" style="width: 3840px; overflow: auto;">
+    <div ref="box" class="box-wrapper">
         <div class="cesium fullSize" id="CesiumContainer"></div>
         <div class="container">
-            <el-button @click="add">点击</el-button>
-            <el-button @click="toggleHeatMap">热力图</el-button>
+            <!--<el-button @click="add">点击</el-button>-->
+            <!--<el-button @click="toggleHeatMap">热力图</el-button>-->
         </div>
     </div>
 </template>
@@ -14,7 +14,7 @@ import Cesium from "cesium/Cesium";
 import "cesium/Widgets/widgets.css";
 import city from "@/json/city.json";
 import { Button } from "element-ui";
-import Heatmap from "heatmap.js"
+// import Heatmap from "heatmap.js"
 export default {
     name: "ceisum",
     data() {
@@ -40,7 +40,7 @@ export default {
                 position: Cesium.Cartesian3.fromDegrees(params.lng, params.lat),
                 label: {
                     text: params.name,
-                    font: "15px 微软雅黑",
+                    font: "20px 微软雅黑",
                     color: Cesium.Color.RED,
                     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 3000000.0)
                     // pixelOffset: new Cesium.Cartesian2(0, 20 + _this.height)
@@ -132,7 +132,7 @@ export default {
                 destination: Cesium.Cartesian3.fromDegrees(
                     101.353254,
                     25.30652958,
-                    1000000
+                    1500000
                 ),
                 complete: function() {
                     city.forEach(element => {
@@ -144,29 +144,35 @@ export default {
     },
     mounted() {
         this.viewer = new Cesium.Viewer("CesiumContainer", {
-            animation: false,
-            geocoder: false,
-            navigationHelpButton: false,
-            timeLine: false,
-            imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-                url: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+            animation:false,
+            baseLayerPicker:false,
+            fullscreenButton:false,
+            vrButton:false,
+            geocoder:false,
+            homeButton:false,
+            infoBox:false,
+            sceneModePicker:false,
+            timeline:false,
+            imageryProvider: new Cesium.WebMapTileServiceImageryProvider({
+                url: 'http://t0.tianditu.gov.cn/img_w/wmts?tk=8ab8c6d579e5edc2c0010ab161a5cdf2',
+                layer:'img',
+                style:'default',
+                tileMatrixSetID:'w',
+                format:'tiles',
+                maximumLevel: 18
             }),
-            baseLayerPicker: false,
-            infoBox: false
+            navigationHelpButton:false,
+            navigationInstructionsInitiallyVisible:false
         });
-        let imagelary = new Cesium.ArcGisMapServerImageryProvider({
-            url: ' http://maps.ynmap.cn/MapService/c4828d25-8a04-40c4-86e4-fe5b6163e50e/img84/WMTS',
-        })
-        this.viewer.imageryLayers.addImageryProvider(imagelary);
-        // let promise= this.viewer.dataSources.add(Cesium.GeoJsonDataSource.load(require('../json/province.json'), {
-        //     stroke: Cesium.Color.AQUA,
-        //     fill: Cesium.Color.TRANSPARENT,
-        //     strokeWidth: 50.0,
-        //     // markerSymbol: '?'
-        // }));
-        // this.viewer.flyTo(promise);
+        let promise= this.viewer.dataSources.add(Cesium.GeoJsonDataSource.load(require('../json/city1.json'), {
+            stroke: Cesium.Color.AQUA,
+            fill: Cesium.Color.TRANSPARENT,
+            strokeWidth: 5,
+            markerSymbol: '?'
+        }));
+        this.viewer.flyTo(promise);
         this.add();
-        // this.heatMap();
+        // // this.heatMap();
         setTimeout(() => {
             this.cameraFly();
         }, 2000);
@@ -175,6 +181,8 @@ export default {
 </script>
 
 <style lang="scss">
+    .box-wrapper { width: 3840px; position: absolute;
+        height: 100%;overflow: auto; }
 .cesium-widget-credits {
     display: none !important;
 }
